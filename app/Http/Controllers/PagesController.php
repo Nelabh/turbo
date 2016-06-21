@@ -14,4 +14,7 @@ class PagesController extends BaseController
     public function home(){
     	return View::make('home');
     }
+    public function dashboard(){
+    	return View::make('dashboard');
+    }
 }

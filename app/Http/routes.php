@@ -12,3 +12,4 @@
 */
 
 Route::get('/',array('as'=>'home','uses'=>'PagesController@home'));
+Route::get('dashboard',array('as'=>'dashboard','uses'=>'PagesController@dashboard'));
