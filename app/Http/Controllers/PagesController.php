@@ -14,4 +14,36 @@ class PagesController extends BaseController
     public function home(){
     	return View::make('home');
     }
+    public function logout(){
+		if(Auth::check()){
+			Auth::logout();
+			Session::forget('email');
+		}
+		return Redirect::route('home');
+	}
+	public function log(){
+		$data = array('email'=>Input::get('email'),'password'=>Input::get('password'));
+		$rules=array(
+			'email' => 'required',
+			'password' => 'required',
+			);
+		$validator = Validator::make($data, $rules);
+		if($validator->fails()){
+
+			return Redirect::back()->withErrors($validator->errors())->withInput();
+		}
+		else {
+			if(Auth::attempt($data)){
+				Session::put('email',$data['email']);
+				return Redirect::route('dashboard');
+			}
+			else{
+				return Redirect::route('home')->with('message','Your email/password combination is incorrect!')->withInput();
+			}
+		}
+	}
+
+
+
+	
 }
