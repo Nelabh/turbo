@@ -1,40 +1,45 @@
 <!DOCTYPE html>
-<html >
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome To Turbo</title>
-    <link rel="stylesheet" href="{{URL::asset('css/reset.css')}}">
-    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
-    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-    <link rel="stylesheet" href="{{URL::asset('css/style1.css')}}">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TURBO | Login</title>
+
+    <link href="{{URL('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href = "{{URL::asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
+
+    <link href = "{{URL::asset('css/animate.css')}}" rel="stylesheet">
+    <link href = "{{URL::asset('css/style.css')}}" rel="stylesheet">
+
 </head>
-<body>
-    <div class="pen-title">
-      <h1>Turbo</h1>
-  </div>
-  <div class="container">
-      <div class="card"></div>
-      <div class="card">
-        <h1 class="title">Login</h1>
-        <form>
-          <div class="input-container">
-            <input type="text" name="username" id="Username" required="required"/>
-            <label for="Username">Username</label>
-            <div class="bar"></div>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <p>Login in. To see it in action.</p>
+            <form class="m-t" role="form" action="index.html">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                <a href = "{{URL::asset('#')}}"><small>Forgot password?</small></a>
+                <p class="text-muted text-center"><small>Do not have an account?</small></p>
+            </form>
         </div>
-        <div class="input-container">
-            <input type="password" id="Password" required="required"/>
-            <label for="Password">Password</label>
-            <div class="bar"></div>
-        </div>
-        <div class="button-container">
-            <button><span>Go</span></button>
-        </div>
-        <div class="footer"><a href="#">Forgot your password?</a></div>
-    </form>
-</div>
-</div>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="{{URL::asset('js/index.js')}}"></script>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src = "{{URL::asset('js/jquery-2.1.1.js')}}"></script>
+    <script src = "{{URL::asset('js/bootstrap.min.js')}}"></script>
+
 </body>
+
 </html>
