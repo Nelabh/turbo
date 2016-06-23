@@ -24,7 +24,7 @@
                             <span class="m-r-sm text-muted welcome-message">Welcome to TURBO.</span>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{URL::asset('logout')}}">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>
@@ -37,63 +37,14 @@
                 <div class="p-w-md m-t-sm">
                     <div class="row">
 
-                        <div class="col-sm-4">
-                            <h1 class="m-b-xs">
-                                26,900
-                            </h1>
-                            <small>
-                                Sales in current month
-                            </small>
-                            <div id="sparkline1" class="m-b-sm"></div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Pages / Visit</small>
-                                    <h4>236 321.80</h4>
-                                </div>
-
-                                <div class="col-xs-4">
-                                    <small class="stats-label">% New Visits</small>
-                                    <h4>46.11%</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Last week</small>
-                                    <h4>432.021</h4>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-sm-4">
-                            <h1 class="m-b-xs">
-                                98,100
-                            </h1>
-                            <small>
-                                Sales in last 24h
-                            </small>
-                            <div id="sparkline2" class="m-b-sm"></div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Pages / Visit</small>
-                                    <h4>166 781.80</h4>
-                                </div>
-
-                                <div class="col-xs-4">
-                                    <small class="stats-label">% New Visits</small>
-                                    <h4>22.45%</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Last week</small>
-                                    <h4>862.044</h4>
-                                </div>
-                            </div>
-
-
-                        </div>
+                      @if(count($dealer))
+                      
                         <div class="col-sm-4">
 
                             <div class="row m-t-xs">
                                 <div class="col-xs-6">
-                                    <h5 class="m-b-xs">Income last month</h5>
-                                    <h1 class="no-margins">160,000</h1>
+                                    <h5 class="m-b-xs">Total Volume</h5>
+                                    <h1 class="no-margins">{!! $dealer->total !!}</h1>
                                     <div class="font-bold text-navy">98% <i class="fa fa-bolt"></i></div>
                                 </div>
                                 <div class="col-xs-6">
@@ -104,51 +55,14 @@
                             </div>
 
 
-                            <table class="table small m-t-sm">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>142</strong> Projects
-
-                                        </td>
-                                        <td>
-                                            <strong>22</strong> Messages
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>61</strong> Comments
-                                        </td>
-                                        <td>
-                                            <strong>54</strong> Articles
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>154</strong> Companies
-                                        </td>
-                                        <td>
-                                            <strong>32</strong> Clients
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-
-
+                           
                         </div>
+                        @endif
 
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="small pull-left col-md-3 m-l-lg m-t-md">
-                                <strong>Sales char</strong> have evolved over the years sometimes.
-                            </div>
-                            <div class="small pull-right col-md-3 m-t-md text-right">
-                                <strong>There are many</strong> variations of passages of Lorem Ipsum available, but the majority have suffered.
-                            </div>
+                       
                             <div class="flot-chart m-b-xl">
                                 <div class="flot-chart-content" id="flot-dashboard5-chart"></div>
                             </div>
@@ -165,179 +79,62 @@
                                 <div class="ibox-content">
 
                                     <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                             <div class="form-group">
-                                                <label class="control-label" for="product_name">Project Name</label>
-                                                <input type="text" id="product_name" name="product_name" value="" placeholder="Project Name" class="form-control">
+
+                                                <label class="control-label" for="product_name">S.No<label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="product_name">Customer Code<label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                           <div class="form-group">
+                                                <label class="control-label" for="pump_name">Pump name</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group">
-                                                <label class="control-label" for="price">Name</label>
-                                                <input type="text" id="price" name="price" value="" placeholder="Name" class="form-control">
+                                                <label class="control-label" for="count">Total customers added</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group">
-                                                <label class="control-label" for="quantity">Company</label>
-                                                <input type="text" id="quantity" name="quantity" value="" placeholder="Company" class="form-control">
+                                                <label class="control-label" for="total_volume">Total sales</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label class="control-label" for="status">Status</label>
-                                                <select name="status" id="status" class="form-control">
-                                                    <option value="1" selected="">Completed</option>
-                                                    <option value="0">Pending</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="table-responsive">
                                         <table class="table table-striped">
+                                           <?php $id=0;  ?>
 
                                             <tbody>
+                                                @if(count($dealer))
+
+                                                @foreach($dealer as $deal)
+
+                                                
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Master project</td>
-                                                    <td>Patrick Smith</td>
-                                                    <td>$892,074</td>
-                                                    <td>Inceptos Hymenaeos Ltd</td>
-                                                    <td><strong>20%</strong></td>
-                                                    <td>Jul 14, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                    <td><?php ++$id ?></td>
+                                                    <td>{!! $deal->customer_code !!}</td>
+                                                    <td>{!! $deal->Pump_name !!}</td>
+                                                    <td>{!! $deal->customers !!}</td>
+                                                    <td>{!! $deal->volume !!}</td>
+                                                    
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Alpha project</td>
-                                                    <td>Alice Jackson</td>
-                                                    <td>$963,486</td>
-                                                    <td>Nec Euismod In Company</td>
-                                                    <td><strong>40%</strong></td>
-                                                    <td>Jul 16, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Betha project</td>
-                                                    <td>John Smith</td>
-                                                    <td>$996,824</td>
-                                                    <td>Erat Volutpat</td>
-                                                    <td><strong>75%</strong></td>
-                                                    <td>Jul 18, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Gamma project</td>
-                                                    <td>Anna Jordan</td>
-                                                    <td>$105,192</td>
-                                                    <td>Tellus Ltd</td>
-                                                    <td><strong>18%</strong></td>
-                                                    <td>Jul 22, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Alpha project</td>
-                                                    <td>Alice Jackson</td>
-                                                    <td>$674,803</td>
-                                                    <td>Nec Euismod In Company</td>
-                                                    <td><strong>40%</strong></td>
-                                                    <td>Jul 16, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Master project</td>
-                                                    <td>Patrick Smith</td>
-                                                    <td>$174,729</td>
-                                                    <td>Inceptos Hymenaeos Ltd</td>
-                                                    <td><strong>20%</strong></td>
-                                                    <td>Jul 14, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Gamma project</td>
-                                                    <td>Anna Jordan</td>
-                                                    <td>$823,198</td>
-                                                    <td>Tellus Ltd</td>
-                                                    <td><strong>18%</strong></td>
-                                                    <td>Jul 22, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Project <small>This is example of project</small></td>
-                                                    <td>Patrick Smith</td>
-                                                    <td>$778,696</td>
-                                                    <td>Inceptos Hymenaeos Ltd</td>
-                                                    <td><strong>20%</strong></td>
-                                                    <td>Jul 14, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Alpha project</td>
-                                                    <td>Alice Jackson</td>
-                                                    <td>$861,063</td>
-                                                    <td>Nec Euismod In Company</td>
-                                                    <td><strong>40%</strong></td>
-                                                    <td>Jul 16, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Betha project</td>
-                                                    <td>John Smith</td>
-                                                    <td>$109,125</td>
-                                                    <td>Erat Volutpat</td>
-                                                    <td><strong>75%</strong></td>
-                                                    <td>Jul 18, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Gamma project</td>
-                                                    <td>Anna Jordan</td>
-                                                    <td>$600,978</td>
-                                                    <td>Tellus Ltd</td>
-                                                    <td><strong>18%</strong></td>
-                                                    <td>Jul 22, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Alpha project</td>
-                                                    <td>Alice Jackson</td>
-                                                    <td>$150,161</td>
-                                                    <td>Nec Euismod In Company</td>
-                                                    <td><strong>40%</strong></td>
-                                                    <td>Jul 16, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Project <small>This is example of project</small></td>
-                                                    <td>Patrick Smith</td>
-                                                    <td>$160,586</td>
-                                                    <td>Inceptos Hymenaeos Ltd</td>
-                                                    <td><strong>20%</strong></td>
-                                                    <td>Jul 14, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Gamma project</td>
-                                                    <td>Anna Jordan</td>
-                                                    <td>$110,612</td>
-                                                    <td>Tellus Ltd</td>
-                                                    <td><strong>18%</strong></td>
-                                                    <td>Jul 22, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
+
+                                                
+                                                @endforeach
+                                                
+
+                                                @else
+
+                                              <center>  <td colspan = "5">No Dealer Added</td></center>
+                                              @endif
                                             </tbody>
                                         </table>
                                     </div>

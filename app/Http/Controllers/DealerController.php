@@ -13,6 +13,7 @@ use Redirect;
 use Validator;
 use Auth;
 use App\Admin;
+use App\Dealer
 use Session;
 class DealerController extends BaseController
 {
@@ -22,11 +23,14 @@ class DealerController extends BaseController
     $this->middleware('auth');
 }*/
 	public static function dealers(){
-		if(Auth::check->level<=5){
+		if(Auth::user() -> level <= 5){
 			$action = "Dealers";
 		return View::make('dashboard_dealer', compact('action'));
 		}
 	
 
 	}
+
+
+	
 }

@@ -13,6 +13,7 @@ use Redirect;
 use Validator;
 use Auth;
 use App\Admin;
+use App\Dealer;
 use Session;
 class AdminController extends BaseController{
 
@@ -23,10 +24,19 @@ public function __construct()
 }
 
 	public static function admin(){
-		if(Auth::check->level>=10)
-		{
-				$action = "Dashboard";
-		return View::make('dashboard_admin', compact('action'));
+		if(Auth::user()-> level >= 10)
+		{  
+			$dealer = Dealer::all();
+			foreach ($dealer as $deal) {
+				$cust = count(Customer::where('customer_code',$deal->customer_code)->get());
+				$volume = Customer::where('customer_code',$deal->customer_code)->sum('total_volume');
+				$total= Customer::all()->sum('total_volume');
+				$deal->customers = $cust;
+				$deal->volume  = $volume;
+				$deal->total = $total;
+			}
+			$action="Dashboard";
+		return View::make('dashboard_admin', compact('action','dealer'));
 
 		}
 
