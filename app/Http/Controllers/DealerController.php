@@ -13,7 +13,7 @@ use Redirect;
 use Validator;
 use Auth;
 use App\Admin;
-use App\Dealer
+use App\Dealer;
 use Session;
 class DealerController extends BaseController
 {

@@ -7,7 +7,7 @@
 
 <body>
     <div id="wrapper">
-    @include('leftnavigation')
+    @include('leftnavigation_dealer')
         <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
