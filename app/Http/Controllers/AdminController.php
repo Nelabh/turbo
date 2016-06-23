@@ -15,5 +15,21 @@ use Auth;
 use App\Admin;
 use Session;
 class AdminController extends BaseController{
+
+	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+public function __construct()
+{
+    $this->middleware('auth');
+}
+
+	public static function admin(){
+		if(Auth::check->level>=10)
+		{
+				$action = "Dashboard";
+		return View::make('dashboard_admin', compact('action'));
+
+		}
+
+	}
 	
 }

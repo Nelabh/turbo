@@ -16,5 +16,17 @@ use App\Admin;
 use Session;
 class DealerController extends BaseController
 {
+	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+public function __construct()
+{
+    $this->middleware('auth');
+}
+	public static function dealers(){
+		if(Auth::check->level<=5){
+			$action = "Dealers";
+		return View::make('dashboard_dealer', compact('action'));
+		}
 	
+
+	}
 }
