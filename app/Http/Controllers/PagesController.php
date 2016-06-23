@@ -8,6 +8,12 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use View;
+use Illuminate\Support\Facades\Input;
+use Redirect;
+use Validator;
+use Auth;
+use App\Admin;
+use Session;
 class PagesController extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
@@ -22,11 +28,10 @@ class PagesController extends BaseController
 		return Redirect::route('home');
 	}
 	public function log(){
-		$data = array('email'=>Input::get('email'),'password'=>Input::get('password'),'level'=>Input::get('level'));
+		$data = array('customer_code'=>Input::get('customer_code'),'password'=>Input::get('password'));
 		$rules=array(
-			'email' => 'required',
+			'customer_code' => 'required',
 			'password' => 'required',
-			'level' => 'required'
 			);
 		$validator = Validator::make($data, $rules);
 		if($validator->fails()){
@@ -35,13 +40,17 @@ class PagesController extends BaseController
 		}
 		else {
 			if(Auth::attempt($data)){
-				Session::put('email',$data['email']);
+				Session::put('customer_code',$data['customer_code']);
 				return Redirect::route('dashboard');
 			}
 			else{
 				return Redirect::route('home')->with('message','Your email/password combination is incorrect!')->withInput();
 			}
 		}
+	}
+
+	public function dashboard(){
+		dd("Hello");
 	}
 
 

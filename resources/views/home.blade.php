@@ -21,17 +21,17 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <p>Login in. To see it in action.</p>
-            <form class="m-t" role="form" action="#">
+            <form class="m-t" role="form" method="post" action="{{URL::route('login')}}">
+                {{csrf_field()}}
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username" required="">
+                    <input type="text" class="form-control" placeholder="Customer Code" required name="customer_code">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required="">
+                    <input type="password" class="form-control" placeholder="Password" required name="password">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
                 <a href = "{{URL::asset('#')}}"><small>Forgot password?</small></a>
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
             </form>
         </div>
     </div>
