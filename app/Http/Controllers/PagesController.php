@@ -55,15 +55,15 @@ class PagesController extends BaseController
      		return admin_dash();
 		
 		}
-	}
+	
 
 
-	public function __construct()
+	/*public function __construct()
 {
     $this->middleware('auth');
 }
 
-
+*/
 
 public function dash(){
 	return View::make('dashboard');
