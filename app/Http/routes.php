@@ -18,6 +18,7 @@ Route::get('admin',array('as'=> 'admin','uses'=>'AdminController@admin'));
 
 Route::get('logout',array('as'=>'logout','uses'=>'PagesController@logout'));
 Route::post('log',array('as'=>'login','uses'=>'PagesController@log'));
+Route::post('add_dealer',array('as'=>'add_dealer','uses'=>'PagesController@add_dealer'));
 
 
 

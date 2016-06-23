@@ -455,5 +455,41 @@
 
 });
 </script>
+
+@if(Session::has('success'))
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 2000
+                };
+                toastr.success("{{Session::get('success')}}");
+
+            }, 1300);
+
+        });
+          </script>
+          @endif
+@if(Session::has('login'))
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 2000
+                };
+                toastr.success("{{Session::get('login')}}");
+
+            }, 1300);
+
+        });
+          </script>
+          @endif
+
 </body>
 </html>

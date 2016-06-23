@@ -50,18 +50,3 @@
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 2000
-                };
-                toastr.success('Login Successful', 'Welcome to TURBO');
-
-            }, 1300);
-
-        });
-          </script>

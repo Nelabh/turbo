@@ -33,7 +33,7 @@
                 </nav>
             </div>
             <div class="wrapper wrapper-content animated fadeIn">
-             <div class="row">
+               <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-title">
@@ -51,9 +51,9 @@
                             <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
                                 <thead>
                                     <tr>
-                                        <th>Dealer Name</th>
+                                        <th>Customer Code</th>
                                         <th>Pump Name</th>
-                                        <th data-hide="phone,tablet">Number Of Devices</th>
+                                        <th data-hide="phone,tablet">Name Of Dealer</th>
                                         <th data-hide="phone,tablet">Contact</th>
                                         <th data-hide="phone,tablet">City</th>
                                     </tr>
@@ -62,13 +62,12 @@
                                     @if($dealers == NULL)
                                     @foreach($dealers as $deal)
                                     <tr class="gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 4.0
+                                        <td>{{$deal->customer_code}}</td>
+                                        <td>{{$deal->pump_name}}
                                         </td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
+                                        <td>{{$deal->name}}</td>
+                                        <td class="center">{{$deal->contact}}</td>
+                                        <td class="center">{{$deal->city}}</td>
                                     </tr>
                                     @endforeach
                                     @else
@@ -98,69 +97,71 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title">Add New Dealer</h4>
                     </div>
-                    <div class="modal-body">
+                    <form method="post" action = "{{URL::route('add_dealer')}}" class="form-horizontal">
 
-                        <form method="get" class="form-horizontal">
+                        <div class="modal-body">
+
                             <div class="form-group"><label class="col-sm-2 control-label">Customer Code</label>
 
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "customer_code" class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Name</label>
 
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "name" class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Contact</label>
 
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "contact" class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Pump Name</label>
 
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "pump_name" class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">City</label>
 
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "city" class="form-control"></div>
                             </div>
 
                             <div class="form-group"><label class="col-sm-2 control-label">E-mail</label>
 
-                                <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "email" class="form-control"></div>
                             </div> 
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Add</button>
+                            <button type="submit"  class="btn btn-primary">Add</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="wrapper wrapper-content">
-                        <div class="row">
-
-                        </div>
-                    </div>
-                    @include('footer')
-                </div>
-            </div>
-
         </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content">
+                    <div class="row">
+
+                    </div>
+                </div>
+                @include('footer')
+            </div>
+        </div>
+
     </div>
+</div>
 
-    @include('js')
-    <!-- FooTable -->
-    <script src="js/plugins/footable/footable.all.min.js"></script>
-    <script>
-    $(document).ready(function() {
+@include('js')
+<!-- FooTable -->
+<script src="js/plugins/footable/footable.all.min.js"></script>
+<script>
+$(document).ready(function() {
 
-        $('.footable').footable();
-        $('.footable2').footable();
+    $('.footable').footable();
+    $('.footable2').footable();
 
-    });
+});
 
-    </script>
+</script>
 
 </body>
 </html>
