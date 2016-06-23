@@ -22,11 +22,14 @@ public function __construct()
     $this->middleware('auth');
 }
 	public static function dealers(){
-		if(Auth::check->level<=5){
+		if(Auth::user() -> level <= 5){
 			$action = "Dealers";
 		return View::make('dashboard_dealer', compact('action'));
 		}
 	
 
 	}
+
+
+	
 }

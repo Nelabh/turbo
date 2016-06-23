@@ -23,9 +23,9 @@ public function __construct()
 }
 
 	public static function admin(){
-		if(Auth::check->level>=10)
+		if(Auth::user()-> level >= 10)
 		{
-				$action = "Dashboard";
+			$action="Dashboard";
 		return View::make('dashboard_admin', compact('action'));
 
 		}
