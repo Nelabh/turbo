@@ -21,5 +21,4 @@ Route::post('log',array('as'=>'login','uses'=>'PagesController@log'));
 
 
 Route::group(['middleware' => ['auth']], function () {
-
 });
