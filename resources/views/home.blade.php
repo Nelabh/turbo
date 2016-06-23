@@ -21,7 +21,7 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <p>Login in. To see it in action.</p>
-            <form class="m-t" role="form" action="index.html">
+            <form class="m-t" role="form" action="#">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Username" required="">
                 </div>

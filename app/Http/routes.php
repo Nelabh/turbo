@@ -21,8 +21,4 @@ Route::post('log',array('as'=>'login','uses'=>'PagesController@log'));
 
 
 Route::group(['middleware' => ['auth']], function () {
-//Route::get('dashboard', array('as'=>'dashboard','uses'=>'UserController@dashboard'));
-//Route::get('history', array('as'=>'history','uses'=>'UserController@history'));
-Route::get('dash',array('as'=>'dash','uses'=>'UserController@dash'));
-
 });

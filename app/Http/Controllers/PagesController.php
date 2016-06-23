@@ -10,21 +10,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use View;
 class PagesController extends BaseController
 {
-
-	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
-	public function home(){
-		$action = "Login";
-		return View::make('home',compact('action'));
-	}
-	public function dealers(){
-		$action = "Dealers";
-		return View::make('dealers',compact('action'));
-	}
-	public function dashboard(){
-		$action = "Dashboard";
-		return View::make('dashboard_admin',compact('action'));
-	}
-	public function logout(){
+    use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+    public function home(){
+    	return View::make('home');
+    }
+    public function logout(){
 		if(Auth::check()){
 			Auth::logout();
 			Session::forget('email');
@@ -55,18 +45,5 @@ class PagesController extends BaseController
 	}
 
 
-	/*public static function dashboard(){
-	//	dd(Auth::user()->level);
-		if(Auth::user()->level==0)
-		{
-			return superadmin_dash();
-		}
-		else 
-			return admin_dash();
-		
-	}*/
 	
-	public function dash(){
-		return View::make('dashboard');
-	}
 }
