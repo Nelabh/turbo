@@ -45,27 +45,5 @@ class PagesController extends BaseController
 	}
 
 
-	 public static function dashboard(){
 	
-     	if(Auth::user()->level==0)
-     	{
-     		return admin_dash();
-     	}
-     	else 
-     		return dealer_dash();
-		
-		}
-	}
-
-
-	/*public function __construct()
-{
-    $this->middleware('auth');
-}
-
-*/
-
-public function dash(){
-	return View::make('dashboard');
-}
 }
