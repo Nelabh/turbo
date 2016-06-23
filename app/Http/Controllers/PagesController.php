@@ -12,11 +12,16 @@ class PagesController extends BaseController
 {
 	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 	public function home(){
-		return View::make('home');
+		$action = "Login";
+		return View::make('home',compact('action'));
 	}
-
+	public function dealers(){
+		$action = "Dealers";
+		return View::make('dealers',compact('action'));
+	}
 	public function dashboard(){
-		return View::make('dashboard');
+		$action = "Dashboard";
+		return View::make('dashboard_admin',compact('action'));
 	}
 	public function logout(){
 		if(Auth::check()){
