@@ -13,6 +13,7 @@ use Redirect;
 use Validator;
 use Auth;
 use App\Admin;
+use App\Dealer;
 use Session;
 class PagesController extends BaseController
 {
@@ -65,9 +66,9 @@ class PagesController extends BaseController
 	}
 
 	public function dealers(){
+		$dealers = Dealer::all();
 	$action = "Dealers";
-		return View::make('dealers', compact('action'));
-
+		return View::make('dealers', compact('action','dealers'));
 	}
 
 	
