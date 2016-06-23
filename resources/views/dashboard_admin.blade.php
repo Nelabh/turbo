@@ -24,7 +24,7 @@
                             <span class="m-r-sm text-muted welcome-message">Welcome to TURBO.</span>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{URL::asset('logout')}}">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>
@@ -37,14 +37,14 @@
                 <div class="p-w-md m-t-sm">
                     <div class="row">
 
-                      
+                      @if(count($dealer))
                       
                         <div class="col-sm-4">
 
                             <div class="row m-t-xs">
                                 <div class="col-xs-6">
-                                    <h5 class="m-b-xs">Income last month</h5>
-                                    <h1 class="no-margins">160,000</h1>
+                                    <h5 class="m-b-xs">Total Volume</h5>
+                                    <h1 class="no-margins">{!! $dealer->total !!}</h1>
                                     <div class="font-bold text-navy">98% <i class="fa fa-bolt"></i></div>
                                 </div>
                                 <div class="col-xs-6">
@@ -55,40 +55,9 @@
                             </div>
 
 
-                            <table class="table small m-t-sm">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>142</strong> Projects
-
-                                        </td>
-                                        <td>
-                                            <strong>22</strong> Messages
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>61</strong> Comments
-                                        </td>
-                                        <td>
-                                            <strong>54</strong> Articles
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>154</strong> Companies
-                                        </td>
-                                        <td>
-                                            <strong>32</strong> Clients
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-
-
+                           
                         </div>
+                        @endif
 
                     </div>
 
@@ -110,12 +79,18 @@
                                 <div class="ibox-content">
 
                                     <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                             <div class="form-group">
-                                                <label class="control-label" for="product_name">Dealer Name<label>
+
+                                                <label class="control-label" for="product_name">S.No<label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="product_name">Customer Code<label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
                                            <div class="form-group">
                                                 <label class="control-label" for="pump_name">Pump name</label>
                                             </div>
@@ -135,16 +110,31 @@
 
                                     <div class="table-responsive">
                                         <table class="table table-striped">
+                                           <?php $id=0;  ?>
 
                                             <tbody>
+                                                @if(count($dealer))
+
+                                                @foreach($dealer as $deal)
+
+                                                
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Master project</td>
-                                                    <td>Patrick Smith</td>
-                                                    <td>$892,074</td>
+                                                    <td><?php ++$id ?></td>
+                                                    <td>{!! $deal->customer_code !!}</td>
+                                                    <td>{!! $deal->Pump_name !!}</td>
+                                                    <td>{!! $deal->customers !!}</td>
+                                                    <td>{!! $deal->volume !!}</td>
                                                     
                                                 </tr>
+
                                                 
+                                                @endforeach
+                                                
+
+                                                @else
+
+                                              <center>  <td colspan = "5">No Dealer Added</td></center>
+                                              @endif
                                             </tbody>
                                         </table>
                                     </div>

@@ -15,10 +15,13 @@ class CreateCustomersTable extends Migration
      Schema::create('customers', function (Blueprint $table) {
         $table->increments('id');
         $table->string('vehicle_number')->unique();
+        $table->string('customer_code');
         $table->string('name');
         $table->string('email');
         $table->string('contact');
         $table->string('total_volume')->default('0');
+        $table->foreign('customer_code')->references('customer_code')->on('admin')->onDelete('cascade');
+        
      });
      }
 
