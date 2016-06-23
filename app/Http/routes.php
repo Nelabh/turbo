@@ -13,7 +13,7 @@
 
 Route::get('/',array('as'=>'home','uses'=>'PagesController@home'));
 Route::get('dashboard',array('as'=>'dashboard','uses'=>'PagesController@dashboard'));
-Route::get('dealers',array('as'=>'dealers','uses'=>'DealerController@dealers'));
+Route::get('dealers',array('as'=>'dealers','uses'=>'PagesController@dealers'));
 Route::get('admin',array('as'=> 'admin','uses'=>'AdminController@admin'));
 
 Route::get('logout',array('as'=>'logout','uses'=>'PagesController@logout'));
