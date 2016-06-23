@@ -50,10 +50,18 @@ class PagesController extends BaseController
 	}
 
 	public function dashboard(){
-		$action = "Dashboard";
+		if(Auth::check()->level>=10){
+			$action = "Dashboard";
 		return View::make('dashboard_admin', compact('action'));
+		}
+		else{
+			$action = "Dashboard";
+		return View::make('dashboard_dealer', compact('action'));
 
+		}
+		
 	}
+	
 	public function dealers(){
 	$action = "Dealers";
 		return View::make('dealers', compact('action'));
