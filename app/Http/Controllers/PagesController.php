@@ -46,16 +46,16 @@ class PagesController extends BaseController
 
 
 	 public static function dashboard(){
-	//	dd(Auth::user()->level);
+	
      	if(Auth::user()->level==0)
      	{
-     		return superadmin_dash();
+     		return admin_dash();
      	}
      	else 
-     		return admin_dash();
+     		return dealer_dash();
 		
 		}
-	
+	}
 
 
 	/*public function __construct()
