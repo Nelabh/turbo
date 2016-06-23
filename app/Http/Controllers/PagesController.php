@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use View;
 class PagesController extends BaseController
 {
+
 	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 	public function home(){
 		$action = "Login";
@@ -31,10 +32,11 @@ class PagesController extends BaseController
 		return Redirect::route('home');
 	}
 	public function log(){
-		$data = array('email'=>Input::get('email'),'password'=>Input::get('password'));
+		$data = array('email'=>Input::get('email'),'password'=>Input::get('password'),'level'=>Input::get('level'));
 		$rules=array(
 			'email' => 'required',
 			'password' => 'required',
+			'level' => 'required'
 			);
 		$validator = Validator::make($data, $rules);
 		if($validator->fails()){
@@ -50,5 +52,21 @@ class PagesController extends BaseController
 				return Redirect::route('home')->with('message','Your email/password combination is incorrect!')->withInput();
 			}
 		}
+	}
+
+
+	/*public static function dashboard(){
+	//	dd(Auth::user()->level);
+		if(Auth::user()->level==0)
+		{
+			return superadmin_dash();
+		}
+		else 
+			return admin_dash();
+		
+	}*/
+	
+	public function dash(){
+		return View::make('dashboard');
 	}
 }

@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>TURBO |{{$action}}</title>
+    <title>TURBO | {{$action}}</title>
 
     <link href = "{{URL::asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href = "{{URL::asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
