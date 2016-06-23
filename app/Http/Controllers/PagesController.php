@@ -16,11 +16,11 @@ use App\Admin;
 use Session;
 class PagesController extends BaseController
 {
-    use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
-    public function home(){
-    	return View::make('home');
-    }
-    public function logout(){
+	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+	public function home(){
+		return View::make('home');
+	}
+	public function logout(){
 		if(Auth::check()){
 			Auth::logout();
 			Session::forget('email');
@@ -50,9 +50,15 @@ class PagesController extends BaseController
 	}
 
 	public function dashboard(){
-		dd("Hello");
-	}
+		$action = "Dashboard";
+		return View::make('dashboard_admin', compact('action'));
 
+	}
+	public function dealers(){
+	$action = "Dealers";
+		return View::make('dealers', compact('action'));
+
+	}
 
 	
 }
