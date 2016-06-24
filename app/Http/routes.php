@@ -22,6 +22,8 @@ Route::post('log',array('as'=>'login','uses'=>'PagesController@log'));
 Route::group(['middleware' => ['auth']], function () {
 Route::get('dealers',array('as'=>'dealers','uses'=>'AdminController@dealers'));
 Route::post('add_dealer',array('as'=>'add_dealer','uses'=>'AdminController@add_dealer'));
+Route::get('devices',array('as'=>'devices','uses'=>'DealerController@devices'));
+Route::post('add_device',array('as'=>'add_device','uses'=>'DealerController@add_device'));
 
 });
 

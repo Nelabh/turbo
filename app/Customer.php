@@ -20,5 +20,5 @@ class Customer extends Authenticatable
      *
      * @var array
      */
-    protected $table = "Customers";
+    protected $table = "customers";
 }

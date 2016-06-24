@@ -42,7 +42,7 @@ class PagesController extends BaseController
 		else {
 			if(Auth::attempt($data)){
 				Session::put('customer_code',$data['customer_code']);
-				return Redirect::route('dashboard');
+				return Redirect::intended('dashboard');
 			}
 			else{
 				return Redirect::route('home')->with('message','Your email/password combination is incorrect!')->withInput();

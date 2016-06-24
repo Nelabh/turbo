@@ -18,14 +18,26 @@ use Session;
 class DealerController extends BaseController
 {
 	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
-public function __construct()
-{
-    $this->middleware('auth');
-}
-public static function dealers(){
-	if(Auth::user() -> level <= 5){
-		$action = "Dashboard";
-		return View::make('dashboard_dealer', compact('action'));
+	public function __construct()
+	{
+		$this->middleware('auth');
 	}
-}
+	public static function dealers(){
+		if(Auth::user() -> level <= 5){
+			$action = "Dashboard";
+			return View::make('dashboard_dealer', compact('action'));
+		}
+		else{
+			return Redirect::route('home');
+		}
+	}
+	public function devices(){
+		if(Auth::user()->level <= 5){
+			return View::make('devices');
+		}
+		else{
+			return Redirect::route('home');
+
+		}
+	}
 }
