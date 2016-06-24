@@ -20,6 +20,8 @@ class CreateDealersTable extends Migration
             $table->string('pump_name');
             $table->string('city');
             $table->string('email');
+            $table->string('petrol_price');
+            $table->string('diesel_price');
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('customer_code')->references('customer_code')->on('admin')->onDelete('cascade');

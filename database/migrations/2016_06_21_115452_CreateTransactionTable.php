@@ -18,6 +18,9 @@ class CreateTransactionTable extends Migration
         $table->string('vehicle_number');
         $table->string('volume');
         $table->string('device_id');
+        $table->string('type');
+        $table->string('rate');
+        $table->string('total_cost');
         $table->timestamps();
         $table->foreign('device_id')->references('device_id')->on('devices')->onDelete('cascade');
      });
