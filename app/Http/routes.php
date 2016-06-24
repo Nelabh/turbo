@@ -24,3 +24,7 @@ Route::get('dealers',array('as'=>'dealers','uses'=>'AdminController@dealers'));
 Route::post('add_dealer',array('as'=>'add_dealer','uses'=>'AdminController@add_dealer'));
 
 });
+
+
+
+Route::post('check_device',array('as'=>'check','uses'=>'ApiController@check_device'));
