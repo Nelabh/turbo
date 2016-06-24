@@ -98,34 +98,40 @@
                         <h4 class="modal-title">Add New Dealer</h4>
                     </div>
                     <form method="post" action = "{{URL::route('add_dealer')}}" class="form-horizontal">
+                        {{csrf_field()}}
 
                         <div class="modal-body">
 
                             <div class="form-group"><label class="col-sm-2 control-label">Customer Code</label>
 
-                                <div class="col-sm-10"><input type="text" name = "customer_code" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "customer_code" placeholder = "Customer Code Of Dealer" required class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Name</label>
 
-                                <div class="col-sm-10"><input type="text" name = "name" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "name" placeholder = "Name Of Dealer" required class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Contact</label>
 
-                                <div class="col-sm-10"><input type="text" name = "contact" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" placeholder = "Contact Number Of Dealer" name = "contact" required class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Pump Name</label>
 
-                                <div class="col-sm-10"><input type="text" name = "pump_name" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "pump_name" placeholder = "Pump Name Of Dealer" required class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">City</label>
 
-                                <div class="col-sm-10"><input type="text" name = "city" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "city" placeholder = "Name Of the City" required class="form-control"></div>
                             </div>
 
                             <div class="form-group"><label class="col-sm-2 control-label">E-mail</label>
 
-                                <div class="col-sm-10"><input type="text" name = "email" class="form-control"></div>
-                            </div> 
+                                <div class="col-sm-10"><input type="text" name = "email" placeholder = "E-mail ID Of Dealer" required class="form-control"></div>
+                            </div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">Password</label>
+
+                                <div class="col-sm-10"><input type="password" name = "password" placeholder = "Do not forget it" required class="form-control"></div>
+                            </div>  
                         </div>
 
                         <div class="modal-footer">
