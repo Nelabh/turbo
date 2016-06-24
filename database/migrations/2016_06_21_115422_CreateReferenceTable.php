@@ -16,6 +16,7 @@ class CreateReferenceTable extends Migration
      Schema::create('reference', function (Blueprint $table) {
         $table->increments('id');
         $table->string('reference_number')->unique();
+        $table->boolean('flag');
         $table->integer('customer_id')->unsigned()->length(10);
         $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
      });

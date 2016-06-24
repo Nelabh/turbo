@@ -29,4 +29,5 @@ Route::post('add_device',array('as'=>'add_device','uses'=>'DealerController@add_
 
 
 
-Route::post('check_device',array('as'=>'check','uses'=>'ApiController@check_device'));
+Route::post('check_device',array('as'=>'device','uses'=>'ApiController@check_device'));
+Route::post('check_vehicle',array('as'=>'vehicle','uses'=>'ApiController@check_vehicle'));
