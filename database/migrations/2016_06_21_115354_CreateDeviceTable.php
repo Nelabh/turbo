@@ -15,6 +15,8 @@ class CreateDeviceTable extends Migration
      Schema::create('devices', function (Blueprint $table) {
         $table->increments('id');
         $table->string('device_id')->unique();
+        $table->string('device_pin')->unique();
+
         $table->string('customer_code');
         $table->foreign('customer_code')->references('customer_code')->on('admin')->onDelete('cascade');
      });
