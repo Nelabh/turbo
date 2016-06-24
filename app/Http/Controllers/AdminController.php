@@ -20,16 +20,16 @@ use Session;
 class AdminController extends BaseController{
 
 	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
-public function __construct()
-{
-    $this->middleware('auth');
-}
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
 	public static function admin(){
 		if(Auth::user()-> level >= 10)
 		{  
 			$dealer = Dealer::all();
-				$total= Customer::all()->sum('total_volume');
+			$total= Customer::all()->sum('total_volume');
 
 			foreach ($dealer as $deal) {
 				$cust = count(Customer::where('customer_code',$deal->customer_code)->get());
@@ -38,19 +38,55 @@ public function __construct()
 				$deal->volume  = $volume;
 			}
 			$dealer->total = $total;
-							$action="Dashboard";
-		return View::make('dashboard_admin', compact('action','dealer'));
+			$action="Dashboard";
+			return View::make('dashboard_admin', compact('action','dealer'));
 
 		}
 
 	}
 	public function dealers(){
-		if(Auth::user() -> level <= 5){
-		$action = "Dashboard";
+		if(Auth::user() -> level > 5){
+			$action = "Dashboard";
 			$dealers = Dealer::all();
-
-		return View::make('dealers', compact('action','dealers'));
+			//dd($dealers);
+			return View::make('dealers', compact('action','dealers'));
+		}
 	}
+	public function add_dealer(){
+		if(Auth::user()->level > 5){
+			$data = Input::all();
+			$rules=array(
+				'email' => 'required',
+				'password' => 'required',
+				'customer_code' => 'required',
+				'city' => 'required',
+				'pump_name' =>'required',
+				'name' => 'required'
+				);
+			$validator = Validator::make($data, $rules);
+			if($validator->fails()){
+
+				return Redirect::back()->withErrors($validator->errors())->withInput();
+			}
+			else {
+				$admin = new Admin;
+				$admin->customer_code = $data['customer_code'];
+				$admin->password = $data['password'];
+				$admin->level = '5';
+				$admin->save();
+
+				$dealer = new Dealer;
+				$dealer->customer_code = $data['customer_code'];
+				$dealer->name= $data['name'];
+				$dealer->contact = $data['contact'];
+				$dealer->pump_name = $data['pump_name'];
+				$dealer->city = $data['city'];
+				$dealer->email = $data['email'];
+				$dealer->save();
+				return Redirect::route('dealers')->with('success','Dealer Successfully Added');
+			}
+
+		}
 	}
 	
 }

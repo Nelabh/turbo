@@ -9,31 +9,26 @@
     <div id="wrapper">
         @include('leftnavigation_admin')
         <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                        <form role="search" class="navbar-form-custom" action="search_results.html">
-                            <div class="form-group">
-                                <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                            </div>
-                        </form>
-                    </div>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li>
-                            <span class="m-r-sm text-muted welcome-message">Welcome to TURBO.</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-sign-out"></i> Log out
-                            </a>
-                        </li>
-                    </ul>
+         @include('topnavigation')
 
-                </nav>
-            </div>
-            <div class="wrapper wrapper-content animated fadeIn">
-               <div class="row">
+
+         <div class="wrapper wrapper-content animated fadeIn">
+             <div class="signup-form" id="error">
+                @if($errors->has())
+                <p>
+                  {{$errors->first('name',':message')}} </p>
+                  <p>  {{$errors->first('customer_code',':message')}} </p>
+                  <p>  {{$errors->first('contact',':message')}} </p>
+                  <p>  {{$errors->first('email',':message')}} </p>
+                  <p>  {{$errors->first('password',':message')}} </p>
+                  <p>  {{$errors->first('city',':message')}} </p>
+                  <p>  {{$errors->first('pump_name',':message')}} </p>
+                  
+                  @endif
+              </div>
+
+
+              <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-title">
@@ -59,7 +54,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($dealers == NULL)
+                                    @if(count($dealers))
                                     @foreach($dealers as $deal)
                                     <tr class="gradeX">
                                         <td>{{$deal->customer_code}}</td>
@@ -168,6 +163,25 @@ $(document).ready(function() {
 });
 
 </script>
+
+
+@if(Session::has('success'))
+<script>
+$(document).ready(function() {
+    setTimeout(function() {
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 2000
+        };
+        toastr.success("{{Session::get('success')}}");
+
+    }, 1300);
+
+});
+</script>
+@endif
 
 </body>
 </html>

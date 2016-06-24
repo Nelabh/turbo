@@ -2,37 +2,15 @@
 <html>
 
 <head>
-@include('header')
+    @include('header')
 </head>
 
 <body>
     <div id="wrapper">
-    @include('leftnavigation_dealer')
+        @include('leftnavigation_dealer')
         <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" action="#`">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form>
-        </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to TURBO.</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-            </ul>
-
-        </nav>
-        </div>
-                 <div class="wrapper wrapper-content animated fadeIn">
+            @include('topnavigation')
+            <div class="wrapper wrapper-content animated fadeIn">
 
                 <div class="p-w-md m-t-sm">
                     <div class="row">
@@ -106,32 +84,32 @@
 
                             <table class="table small m-t-sm">
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <strong>142</strong> Projects
+                                    <tr>
+                                        <td>
+                                            <strong>142</strong> Projects
 
-                                    </td>
-                                    <td>
-                                        <strong>22</strong> Messages
-                                    </td>
+                                        </td>
+                                        <td>
+                                            <strong>22</strong> Messages
+                                        </td>
 
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>61</strong> Comments
-                                    </td>
-                                    <td>
-                                        <strong>54</strong> Articles
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>154</strong> Companies
-                                    </td>
-                                    <td>
-                                        <strong>32</strong> Clients
-                                    </td>
-                                </tr>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>61</strong> Comments
+                                        </td>
+                                        <td>
+                                            <strong>54</strong> Articles
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>154</strong> Companies
+                                        </td>
+                                        <td>
+                                            <strong>32</strong> Clients
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
 
@@ -198,146 +176,146 @@
                                         <table class="table table-striped">
 
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Master project</td>
-                                                <td>Patrick Smith</td>
-                                                <td>$892,074</td>
-                                                <td>Inceptos Hymenaeos Ltd</td>
-                                                <td><strong>20%</strong></td>
-                                                <td>Jul 14, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Alpha project</td>
-                                                <td>Alice Jackson</td>
-                                                <td>$963,486</td>
-                                                <td>Nec Euismod In Company</td>
-                                                <td><strong>40%</strong></td>
-                                                <td>Jul 16, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Betha project</td>
-                                                <td>John Smith</td>
-                                                <td>$996,824</td>
-                                                <td>Erat Volutpat</td>
-                                                <td><strong>75%</strong></td>
-                                                <td>Jul 18, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Gamma project</td>
-                                                <td>Anna Jordan</td>
-                                                <td>$105,192</td>
-                                                <td>Tellus Ltd</td>
-                                                <td><strong>18%</strong></td>
-                                                <td>Jul 22, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Alpha project</td>
-                                                <td>Alice Jackson</td>
-                                                <td>$674,803</td>
-                                                <td>Nec Euismod In Company</td>
-                                                <td><strong>40%</strong></td>
-                                                <td>Jul 16, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Master project</td>
-                                                <td>Patrick Smith</td>
-                                                <td>$174,729</td>
-                                                <td>Inceptos Hymenaeos Ltd</td>
-                                                <td><strong>20%</strong></td>
-                                                <td>Jul 14, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Gamma project</td>
-                                                <td>Anna Jordan</td>
-                                                <td>$823,198</td>
-                                                <td>Tellus Ltd</td>
-                                                <td><strong>18%</strong></td>
-                                                <td>Jul 22, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Project <small>This is example of project</small></td>
-                                                <td>Patrick Smith</td>
-                                                <td>$778,696</td>
-                                                <td>Inceptos Hymenaeos Ltd</td>
-                                                <td><strong>20%</strong></td>
-                                                <td>Jul 14, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Alpha project</td>
-                                                <td>Alice Jackson</td>
-                                                <td>$861,063</td>
-                                                <td>Nec Euismod In Company</td>
-                                                <td><strong>40%</strong></td>
-                                                <td>Jul 16, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Betha project</td>
-                                                <td>John Smith</td>
-                                                <td>$109,125</td>
-                                                <td>Erat Volutpat</td>
-                                                <td><strong>75%</strong></td>
-                                                <td>Jul 18, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Gamma project</td>
-                                                <td>Anna Jordan</td>
-                                                <td>$600,978</td>
-                                                <td>Tellus Ltd</td>
-                                                <td><strong>18%</strong></td>
-                                                <td>Jul 22, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Alpha project</td>
-                                                <td>Alice Jackson</td>
-                                                <td>$150,161</td>
-                                                <td>Nec Euismod In Company</td>
-                                                <td><strong>40%</strong></td>
-                                                <td>Jul 16, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Project <small>This is example of project</small></td>
-                                                <td>Patrick Smith</td>
-                                                <td>$160,586</td>
-                                                <td>Inceptos Hymenaeos Ltd</td>
-                                                <td><strong>20%</strong></td>
-                                                <td>Jul 14, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Gamma project</td>
-                                                <td>Anna Jordan</td>
-                                                <td>$110,612</td>
-                                                <td>Tellus Ltd</td>
-                                                <td><strong>18%</strong></td>
-                                                <td>Jul 22, 2015</td>
-                                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                            </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Master project</td>
+                                                    <td>Patrick Smith</td>
+                                                    <td>$892,074</td>
+                                                    <td>Inceptos Hymenaeos Ltd</td>
+                                                    <td><strong>20%</strong></td>
+                                                    <td>Jul 14, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Alpha project</td>
+                                                    <td>Alice Jackson</td>
+                                                    <td>$963,486</td>
+                                                    <td>Nec Euismod In Company</td>
+                                                    <td><strong>40%</strong></td>
+                                                    <td>Jul 16, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Betha project</td>
+                                                    <td>John Smith</td>
+                                                    <td>$996,824</td>
+                                                    <td>Erat Volutpat</td>
+                                                    <td><strong>75%</strong></td>
+                                                    <td>Jul 18, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Gamma project</td>
+                                                    <td>Anna Jordan</td>
+                                                    <td>$105,192</td>
+                                                    <td>Tellus Ltd</td>
+                                                    <td><strong>18%</strong></td>
+                                                    <td>Jul 22, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Alpha project</td>
+                                                    <td>Alice Jackson</td>
+                                                    <td>$674,803</td>
+                                                    <td>Nec Euismod In Company</td>
+                                                    <td><strong>40%</strong></td>
+                                                    <td>Jul 16, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Master project</td>
+                                                    <td>Patrick Smith</td>
+                                                    <td>$174,729</td>
+                                                    <td>Inceptos Hymenaeos Ltd</td>
+                                                    <td><strong>20%</strong></td>
+                                                    <td>Jul 14, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Gamma project</td>
+                                                    <td>Anna Jordan</td>
+                                                    <td>$823,198</td>
+                                                    <td>Tellus Ltd</td>
+                                                    <td><strong>18%</strong></td>
+                                                    <td>Jul 22, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Project <small>This is example of project</small></td>
+                                                    <td>Patrick Smith</td>
+                                                    <td>$778,696</td>
+                                                    <td>Inceptos Hymenaeos Ltd</td>
+                                                    <td><strong>20%</strong></td>
+                                                    <td>Jul 14, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Alpha project</td>
+                                                    <td>Alice Jackson</td>
+                                                    <td>$861,063</td>
+                                                    <td>Nec Euismod In Company</td>
+                                                    <td><strong>40%</strong></td>
+                                                    <td>Jul 16, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Betha project</td>
+                                                    <td>John Smith</td>
+                                                    <td>$109,125</td>
+                                                    <td>Erat Volutpat</td>
+                                                    <td><strong>75%</strong></td>
+                                                    <td>Jul 18, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Gamma project</td>
+                                                    <td>Anna Jordan</td>
+                                                    <td>$600,978</td>
+                                                    <td>Tellus Ltd</td>
+                                                    <td><strong>18%</strong></td>
+                                                    <td>Jul 22, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Alpha project</td>
+                                                    <td>Alice Jackson</td>
+                                                    <td>$150,161</td>
+                                                    <td>Nec Euismod In Company</td>
+                                                    <td><strong>40%</strong></td>
+                                                    <td>Jul 16, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Project <small>This is example of project</small></td>
+                                                    <td>Patrick Smith</td>
+                                                    <td>$160,586</td>
+                                                    <td>Inceptos Hymenaeos Ltd</td>
+                                                    <td><strong>20%</strong></td>
+                                                    <td>Jul 14, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Gamma project</td>
+                                                    <td>Anna Jordan</td>
+                                                    <td>$110,612</td>
+                                                    <td>Tellus Ltd</td>
+                                                    <td><strong>18%</strong></td>
+                                                    <td>Jul 22, 2015</td>
+                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -353,107 +331,107 @@
             </div>
 
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="wrapper wrapper-content">
                         <div class="row">
 
                         </div>
+                    </div>
+                    @include('footer')
                 </div>
-                @include('footer')
             </div>
-        </div>
 
         </div>
-         </div>
+    </div>
 
-@include('js')
- <script>
-        $(document).ready(function() {
+    @include('js')
+    <script>
+    $(document).ready(function() {
 
-            var sparklineCharts = function(){
-                $("#sparkline1").sparkline([34, 43, 43, 35, 44, 32, 44, 52], {
-                    type: 'line',
-                    width: '100%',
-                    height: '50',
-                    lineColor: '#1ab394',
-                    fillColor: "transparent"
-                });
-
-                $("#sparkline2").sparkline([32, 11, 25, 37, 41, 32, 34, 42], {
-                    type: 'line',
-                    width: '100%',
-                    height: '50',
-                    lineColor: '#1ab394',
-                    fillColor: "transparent"
-                });
-
-                $("#sparkline3").sparkline([34, 22, 24, 41, 10, 18, 16,8], {
-                    type: 'line',
-                    width: '100%',
-                    height: '50',
-                    lineColor: '#1C84C6',
-                    fillColor: "transparent"
-                });
-            };
-
-            var sparkResize;
-
-            $(window).resize(function(e) {
-                clearTimeout(sparkResize);
-                sparkResize = setTimeout(sparklineCharts, 500);
+        var sparklineCharts = function(){
+            $("#sparkline1").sparkline([34, 43, 43, 35, 44, 32, 44, 52], {
+                type: 'line',
+                width: '100%',
+                height: '50',
+                lineColor: '#1ab394',
+                fillColor: "transparent"
             });
 
-            sparklineCharts();
+            $("#sparkline2").sparkline([32, 11, 25, 37, 41, 32, 34, 42], {
+                type: 'line',
+                width: '100%',
+                height: '50',
+                lineColor: '#1ab394',
+                fillColor: "transparent"
+            });
+
+            $("#sparkline3").sparkline([34, 22, 24, 41, 10, 18, 16,8], {
+                type: 'line',
+                width: '100%',
+                height: '50',
+                lineColor: '#1C84C6',
+                fillColor: "transparent"
+            });
+        };
+
+        var sparkResize;
+
+        $(window).resize(function(e) {
+            clearTimeout(sparkResize);
+            sparkResize = setTimeout(sparklineCharts, 500);
+        });
+
+        sparklineCharts();
 
 
 
 
-            var data1 = [
-                [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,20],[11,10],[12,13],[13,4],[14,7],[15,8],[16,12]
-            ];
-            var data2 = [
-                [0,0],[1,2],[2,7],[3,4],[4,11],[5,4],[6,2],[7,5],[8,11],[9,5],[10,4],[11,1],[12,5],[13,2],[14,5],[15,2],[16,0]
-            ];
-            $("#flot-dashboard5-chart").length && $.plot($("#flot-dashboard5-chart"), [
-                        data1,  data2
-                    ],
-                    {
-                        series: {
-                            lines: {
-                                show: false,
-                                fill: true
-                            },
-                            splines: {
-                                show: true,
-                                tension: 0.4,
-                                lineWidth: 1,
-                                fill: 0.4
-                            },
-                            points: {
-                                radius: 0,
-                                show: true
-                            },
-                            shadowSize: 2
-                        },
-                        grid: {
-                            hoverable: true,
-                            clickable: true,
+        var data1 = [
+        [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,20],[11,10],[12,13],[13,4],[14,7],[15,8],[16,12]
+        ];
+        var data2 = [
+        [0,0],[1,2],[2,7],[3,4],[4,11],[5,4],[6,2],[7,5],[8,11],[9,5],[10,4],[11,1],[12,5],[13,2],[14,5],[15,2],[16,0]
+        ];
+        $("#flot-dashboard5-chart").length && $.plot($("#flot-dashboard5-chart"), [
+            data1,  data2
+            ],
+            {
+                series: {
+                    lines: {
+                        show: false,
+                        fill: true
+                    },
+                    splines: {
+                        show: true,
+                        tension: 0.4,
+                        lineWidth: 1,
+                        fill: 0.4
+                    },
+                    points: {
+                        radius: 0,
+                        show: true
+                    },
+                    shadowSize: 2
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true,
 
-                            borderWidth: 2,
-                            color: 'transparent'
-                        },
-                        colors: ["#1ab394", "#1C84C6"],
-                        xaxis:{
-                        },
-                        yaxis: {
-                        },
-                        tooltip: false
-                    }
+                    borderWidth: 2,
+                    color: 'transparent'
+                },
+                colors: ["#1ab394", "#1C84C6"],
+                xaxis:{
+                },
+                yaxis: {
+                },
+                tooltip: false
+            }
             );
 
-        });
-    </script>
+});
+</script>
 
 </body>
 </html>
