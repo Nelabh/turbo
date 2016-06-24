@@ -51,53 +51,20 @@ class PagesController extends BaseController
 	}
 
 	public function dashboard(){
+		if(Auth::check()){
 		if(Auth::user()->level>=10){
 			return AdminController::admin();
 		}
 		else{
 			return DealerController::dealers();
 		}
+	}
+	else{
+		return Redirect::route('home');
+	}
 		
 	}
 
-	public function dealers(){
-		$dealers = Dealer::all();
-		$action = "Dealers";
-		return View::make('dealers', compact('action','dealers'));
-	}
-	public function add_dealer(){
-		$rules=array(
-			'email' => 'required',
-			'customer_code' => 'required',
-			'contact' => 'required',
-			'city' => 'required',
-			'name' => 'required',
-			'password' => 'required',
-			'pump_name' => 'required'
-			);
-		$validator = Validator::make($data, $rules);
-		if($validator->fails()){
-
-			return Redirect::back()->withErrors($validator->errors())->withInput();
-		}
-		else {
-			$data = Input::all();
-			$admin = new Admin;
-			$admin->customer_code = $data['customer_code'];
-			$admin->password = Hash::make($data['password']);
-			$admin->level = 5;
-			$admin->save();
-			$dealer = new Dealer;
-			$dealer->customer_code = $data['customer_code'];
-			$dealer->name = $data['name'];
-			$dealer->contact = $data['contact'];
-			$dealer->pump_name = $data['pump_name'];
-			$dealer->city = $data['city'];
-			$dealer->email = $data['email'];
-			$dealer->save();
-			return Redirect::route('dashboard')->with('success','Dealer Successfully Added');
-		}
-	}
 
 	
 }

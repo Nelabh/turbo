@@ -13,14 +13,14 @@
 
 Route::get('/',array('as'=>'home','uses'=>'PagesController@home'));
 Route::get('dashboard',array('as'=>'dashboard','uses'=>'PagesController@dashboard'));
-Route::get('dealers',array('as'=>'dealers','uses'=>'PagesController@dealers'));
-Route::get('admin',array('as'=> 'admin','uses'=>'AdminController@admin'));
 
 Route::get('logout',array('as'=>'logout','uses'=>'PagesController@logout'));
 Route::post('log',array('as'=>'login','uses'=>'PagesController@log'));
-Route::post('add_dealer',array('as'=>'add_dealer','uses'=>'PagesController@add_dealer'));
 
 
 
 Route::group(['middleware' => ['auth']], function () {
+Route::get('dealers',array('as'=>'dealers','uses'=>'AdminController@dealers'));
+Route::post('add_dealer',array('as'=>'add_dealer','uses'=>'AdminController@add_dealer'));
+
 });
