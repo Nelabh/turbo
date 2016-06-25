@@ -18,6 +18,7 @@ class CreateDeviceTable extends Migration
         $table->string('device_pin');
         $table->string('customer_code');
         $table->foreign('customer_code')->references('customer_code')->on('admin')->onDelete('cascade');
+        $table->timestamps();
      });
      }
 

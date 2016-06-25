@@ -26,11 +26,11 @@
             
                 @if(Request::path() == 'devices')
             <li class = "ative" >
-                <a href="{{URL::route('dealers')}}"><i class="fa fa-diamond"></i> <span class="nav-label">Devices</span></a>
+                <a href="{{URL::route('devices')}}"><i class="fa fa-diamond"></i> <span class="nav-label">Devices</span></a>
             </li>
             @else
             <li >
-                <a href="{{URL::route('dealers')}}"><i class="fa fa-diamond"></i> <span class="nav-label">Devices</span></a>
+                <a href="{{URL::route('devices')}}"><i class="fa fa-diamond"></i> <span class="nav-label">Devices</span></a>
             </li>
             @endif
             </ul>

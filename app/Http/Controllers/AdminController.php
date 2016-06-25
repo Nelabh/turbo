@@ -51,6 +51,9 @@ class AdminController extends BaseController{
 			//dd($dealers);
 			return View::make('dealers', compact('action','dealers'));
 		}
+		else{
+			return Redirect::route('dashboard');
+		}
 	}
 	public function add_dealer(){
 		if(Auth::user()->level > 5){
@@ -69,6 +72,9 @@ class AdminController extends BaseController{
 				return Redirect::back()->withErrors($validator->errors())->withInput();
 			}
 			else {
+				if(Admin::where('customer_code',$data['customer_code'])->first()){
+					return Redirect::route('devices')->with('failure','Dealer Already Exists');
+				}
 				$admin = new Admin;
 				$admin->customer_code = $data['customer_code'];
 				$admin->password = $data['password'];

@@ -52,7 +52,7 @@
                                 </thead>
                                 <tbody>
                                     @if(count($devices))
-                                    <?php $i = 0;?>
+                                    <?php $i = 1;?>
                                     @foreach($devices as $devi)
                                     <tr class="gradeX">
                                         <td>{{$i}}</td>
@@ -95,10 +95,10 @@
 
                             <div class="form-group"><label class="col-sm-2 control-label">Device IMEI NUMBER</label>
 
-                                <div class="col-sm-10"><input type="text" name = "device_id" placeholder = "IMEI Number of Device" required class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" name = "device_id" maxlength = "17" id="imei" placeholder = "IMEI Number of Device" required class="form-control"></div>
                             </div>
                             <div class="form-group"><label class="col-sm-2 control-label">Device Pin</label>
-                                <div class="col-sm-10"><input type="password" name = "device_pin" placeholder = "3 digit PIN for Authorization of sale" required class="form-control"></div>
+                                <div class="col-sm-10"><input type="password" name = "device_pin" id ="pin" maxlength = "3" placeholder = "3 digit PIN for Authorization of sale" required class="form-control"></div>
                             </div>  
                         </div>
                         <div class="modal-footer">
@@ -136,6 +136,54 @@ $(document).ready(function() {
 </script>
 
 
+<script>
+
+document.getElementById('imei').addEventListener('keydown', function(e)
+  {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: Ctrl+C
+            (e.keyCode == 67 && e.ctrlKey === true) ||
+             // Allow: Ctrl+X
+            (e.keyCode == 88 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+
+document.getElementById('pin').addEventListener('keydown', function(e)
+  {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: Ctrl+C
+            (e.keyCode == 67 && e.ctrlKey === true) ||
+             // Allow: Ctrl+X
+            (e.keyCode == 88 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+
+</script>
+
 @if(Session::has('success'))
 <script>
 $(document).ready(function() {
@@ -144,9 +192,26 @@ $(document).ready(function() {
             closeButton: true,
             progressBar: true,
             showMethod: 'slideDown',
-            timeOut: 2000
+            timeOut: 4000
         };
         toastr.success("{{Session::get('success')}}");
+
+    }, 1300);
+
+});
+</script>
+@endif
+@if(Session::has('failure'))
+<script>
+$(document).ready(function() {
+    setTimeout(function() {
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 4000
+        };
+        toastr.error("<p style = 'color:white;'>{{Session::get('failure')}}</p>");
 
     }, 1300);
 
