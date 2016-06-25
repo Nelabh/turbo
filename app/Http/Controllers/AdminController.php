@@ -15,7 +15,7 @@ use Auth;
 use App\Admin;
 use App\Dealer;
 use App\Customer;
-
+use Hash;
 use Session;
 class AdminController extends BaseController{
 
@@ -46,7 +46,7 @@ class AdminController extends BaseController{
 	}
 	public function dealers(){
 		if(Auth::user() -> level > 5){
-			$action = "Dashboard";
+			$action = "Dealers";
 			$dealers = Dealer::all();
 			//dd($dealers);
 			return View::make('dealers', compact('action','dealers'));
@@ -77,7 +77,7 @@ class AdminController extends BaseController{
 				}
 				$admin = new Admin;
 				$admin->customer_code = $data['customer_code'];
-				$admin->password = $data['password'];
+				$admin->password = Hash::make($data['password']);
 				$admin->level = '5';
 				$admin->save();
 
