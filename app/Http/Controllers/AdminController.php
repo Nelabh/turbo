@@ -73,7 +73,7 @@ class AdminController extends BaseController{
 			}
 			else {
 				if(Admin::where('customer_code',$data['customer_code'])->first()){
-					return Redirect::route('devices')->with('failure','Dealer Already Exists');
+					return Redirect::route('dealers')->with('failure','Dealer Already Exists');
 				}
 				$admin = new Admin;
 				$admin->customer_code = $data['customer_code'];
@@ -92,6 +92,20 @@ class AdminController extends BaseController{
 				return Redirect::route('dealers')->with('success','Dealer Successfully Added');
 			}
 
+		}
+	}
+	public function delete_dealer($id){
+		if(Auth::user()->level >= 5){
+			$admin = Admin::where('customer_code',$id)->first();
+			if($admin->delete()){
+				return Redirect::route('dealers')->with('success','Dealer Successfully Deleted');
+			}
+			else{
+				return Redirect::route('dealers')->with('failure','An Error Occured While Deleting Dealer!!! Please Try Again!!!');
+			}
+		}
+		else{
+			return Redirect::route('devices')->with('failure','Access Denied');
 		}
 	}
 	

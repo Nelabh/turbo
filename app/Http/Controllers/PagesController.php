@@ -45,7 +45,7 @@ class PagesController extends BaseController
 				return Redirect::intended('dashboard');
 			}
 			else{
-				return Redirect::route('home')->with('message','Your email/password combination is incorrect!')->withInput();
+				return Redirect::route('home')->with('message','Your Customer Code / Password combination is incorrect!')->withInput();
 			}
 		}
 	}

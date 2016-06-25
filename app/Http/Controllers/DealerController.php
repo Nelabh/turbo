@@ -57,7 +57,7 @@ class DealerController extends BaseController
 			}
 			else {
 				if(Device::where('device_id',$data['device_id'])->first()){
-					return Redirect::route('dealers')->with('failure','Device Already Exists');
+					return Redirect::route('devices')->with('failure','Device Already Exists');
 
 				}
 				$admin = new Device;
@@ -66,9 +66,24 @@ class DealerController extends BaseController
 				$admin->device_pin = $data['device_pin'];
 				$admin->save();
 
-				return Redirect::route('dealers')->with('success','Device Successfully Added');
+				return Redirect::route('devices')->with('success','Device Successfully Added');
 			}
 
+		}
+	}
+
+	public function delete_device($id){
+		if(Auth::user()->level <= 5 && (Auth::user()->customer_code == Device::where('device_id',$id)->first()->customer_code)){
+			$device = Device::where('device_id',$id)->first();
+			if($device->delete()){
+				return Redirect::route('devices')->with('success','Device Successfully Deleted');
+			}
+			else{
+				return Redirect::route('devices')->with('failure','An Error Occured While Deleting Device!!! Please Try Again!!!');
+			}
+		}
+		else{
+			return Redirect::route('devices')->with('failure','Access Denied');
 		}
 	}
 	

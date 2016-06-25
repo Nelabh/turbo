@@ -51,6 +51,7 @@
                                         <th data-hide="phone,tablet">Name Of Dealer</th>
                                         <th data-hide="phone,tablet">Contact</th>
                                         <th data-hide="phone,tablet">City</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,17 +64,21 @@
                                         <td>{{$deal->name}}</td>
                                         <td class="center">{{$deal->contact}}</td>
                                         <td class="center">{{$deal->city}}</td>
+                                        <td>
+                                            <a href = "{{URL::route('delete_dealer',$deal->customer_code)}}"class="btn btn-outline btn-danger" type="button">
+                                            <i class="fa fa-trash-o"></i> <span class="bold">Delete</span>
+                                        </a></td>
                                     </tr>
                                     @endforeach
                                     @else
                                     <tr class="gradeX">
-                                        <td colspan="5"><center>NO DEALERS ADDED</center></td>
+                                        <td colspan="6"><center>NO DEALERS ADDED</center></td>
                                     </tr>
                                     @endif
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="5">
+                                        <td colspan="6">
                                             <ul class="pagination pull-right"></ul>
                                         </td>
                                     </tr>
@@ -173,7 +178,7 @@ $(document).ready(function() {
             closeButton: true,
             progressBar: true,
             showMethod: 'slideDown',
-            timeOut: 2000
+            timeOut: 4000
         };
         toastr.success("{{Session::get('success')}}");
 
@@ -191,9 +196,9 @@ $(document).ready(function() {
             closeButton: true,
             progressBar: true,
             showMethod: 'slideDown',
-            timeOut: 2000
+            timeOut: 4000
         };
-        toastr.success("{{Session::get('failure')}}");
+        toastr.error("{{Session::get('failure')}}");
 
     }, 1300);
 

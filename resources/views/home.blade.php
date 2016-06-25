@@ -33,6 +33,24 @@
 
                 <a href = "{{URL::asset('#')}}"><small>Forgot password?</small></a>
             </form>
+        
+                @if($errors->has())
+            <div class="has-error" >
+                <p>
+                  {{$errors->first('customer_code',':message')}} </p>
+                  <p>  {{$errors->first('password',':message')}} </p>
+              </div>
+
+                  @endif
+
+                @if(Session::has('message'))
+            <div class="form-group has-error" >
+                <label class = "control-label"> 
+                  {{Session::get('message')}} </label>
+              </div>
+
+                  @endif
+
         </div>
     </div>
 

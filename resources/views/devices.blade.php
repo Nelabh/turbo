@@ -48,6 +48,7 @@
                                     <tr>
                                         <th>S. No.</th>
                                         <th>Device IMEI</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,6 +59,10 @@
                                         <td>{{$i}}</td>
                                         <td>{{$devi->device_id}}
                                         </td>
+                                        <td><a href = "{{URL::route('delete_device',$devi->device_id)}}"class="btn btn-outline btn-danger" type="button">
+                                            <i class="fa fa-trash-o"></i> <span class="bold">Delete</span>
+                                        </a>
+                                    </td>
                                     </tr>
                                     <?php $i++; ?>
                                     @endforeach
@@ -211,7 +216,7 @@ $(document).ready(function() {
             showMethod: 'slideDown',
             timeOut: 4000
         };
-        toastr.error("<p style = 'color:white;'>{{Session::get('failure')}}</p>");
+        toastr.error("{{Session::get('failure')}}");
 
     }, 1300);
 
