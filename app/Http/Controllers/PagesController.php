@@ -19,6 +19,9 @@ class PagesController extends BaseController
 {
 	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 	public function home(){
+		if(Auth::check()){
+			return Redirect::route('dashboard');
+		}
 		return View::make('home');
 	}
 	public function logout(){

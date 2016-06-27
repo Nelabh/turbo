@@ -88,7 +88,7 @@ class DealerController extends BaseController
 		}
 	}
 
-public function offers(){
+	public function offers(){
 		if(Auth::user()->level <= 5){
 			$action = "Offers";
 			$offers = Offer::where('customer_code',Auth::user()->customer_code)->get();
@@ -115,34 +115,36 @@ public function offers(){
 			}
 			else {
 				if(Offer::where('discount_percent',$data['discount_percent'])->
-						where('discount_volume',$data['discount_volume'])->first()){
+					where('discount_volume',$data['discount_volume'])->first()){
 					return Redirect::route('offers')->with('failure','Offer Already Exists');
-				}
-				$offer = new Offer;
-				$offer->refill_type = $data['refill_type'];
-				$offer->customer_code = Auth::user()->customer_code;
-				$offer->discount_volume = $data['discount_volume'];
-				$offer->discount_percent = $data['discount_percent'];
-				$offer->save();
-				return Redirect::route('offers')->with('success','Offer Successfully Added');
 			}
-
+			$offer = new Offer;
+			$offer->refill_type = $data['refill_type'];
+			$offer->customer_code = Auth::user()->customer_code;
+			$offer->discount_volume = $data['discount_volume'];
+			$offer->discount_percent = $data['discount_percent'];
+			$offer->save();
+			return Redirect::route('offers')->with('success','Offer Successfully Added');
 		}
-	}
 
-	public function delete_offer($id){
-		if(Auth::user()->level <= 5 && (Auth::user()->customer_code == Offer::where('id',$id)->first()->customer_code)){
-			$offer = Offer::where('id',$id)->first();
-			if($offer->delete()){
-				return Redirect::route('offers')->with('success','Offer Successfully Deleted');
-			}
-			else{
-				return Redirect::route('ofers')->with('failure','An Error Occured While Deleting Offer!!! Please Try Again!!!');
-			}
+	}
+}
+
+public function delete_offer($id){
+	if(Auth::user()->level <= 5 && (Auth::user()->customer_code == Offer::where('id',$id)->first()->customer_code)){
+		$offer = Offer::where('id',$id)->first();
+		if($offer->delete()){
+			return Redirect::route('offers')->with('success','Offer Successfully Deleted');
 		}
 		else{
-			return Redirect::route('offers')->with('failure','Access Denied');
+			return Redirect::route('ofers')->with('failure','An Error Occured While Deleting Offer!!! Please Try Again!!!');
 		}
 	}
+	else{
+		return Redirect::route('offers')->with('failure','Access Denied');
+	}
+
 	
+}
+
 }
