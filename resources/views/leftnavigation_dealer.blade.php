@@ -25,12 +25,21 @@
             @endif
             
                 @if(Request::path() == 'devices')
-            <li class = "ative" >
+            <li class = "active" >
                 <a href="{{URL::route('devices')}}"><i class="fa fa-diamond"></i> <span class="nav-label">Devices</span></a>
             </li>
             @else
             <li >
                 <a href="{{URL::route('devices')}}"><i class="fa fa-diamond"></i> <span class="nav-label">Devices</span></a>
+            </li>
+            @endif
+                @if(Request::path() == 'offers')
+            <li class = "active" >
+                <a href="{{URL::route('offers')}}"><i class="fa fa-gift"></i> <span class="nav-label">Offers</span></a>
+            </li>
+            @else
+            <li >
+                <a href="{{URL::route('offers')}}"><i class="fa fa-gift"></i> <span class="nav-label">Offers</span></a>
             </li>
             @endif
             </ul>
