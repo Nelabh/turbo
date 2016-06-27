@@ -14,6 +14,7 @@ use Validator;
 use Auth;
 use App\Admin;
 use App\Dealer;
+use App\Offer;
 use App\Device;
 use Session;
 class DealerController extends BaseController
@@ -84,6 +85,62 @@ class DealerController extends BaseController
 		}
 		else{
 			return Redirect::route('devices')->with('failure','Access Denied');
+		}
+	}
+
+public function offers(){
+		if(Auth::user()->level <= 5){
+			$action = "Offers";
+			$offers = Offer::where('customer_code',Auth::user()->customer_code)->get();
+			return View::make('offers',compact('action','offers'));
+		}
+		else{
+			return Redirect::route('home');
+
+		}
+	}
+
+	public function add_offer(){
+		if(Auth::user()->level <= 5){
+			$data = Input::all();
+			$rules=array(
+				'discount_percent' => 'required',
+				'discount_volume' => 'required',
+				'refill_type' => 'required'
+				);
+			$validator = Validator::make($data, $rules);
+			if($validator->fails()){
+
+				return Redirect::back()->withErrors($validator->errors())->withInput();
+			}
+			else {
+				if(Device::where('discount_percent',$data['discount_percent'])->
+						where('discount_volume',$data['discount_volume'])->first()){
+					return Redirect::route('offers')->with('failure','Offer Already Exists');
+				}
+				$offer = new Offer;
+				$offer->refill_type = $data['refill_type'];
+				$offer->discount_volume = $data['discount_volume'];
+				$offer->discount_percent = $data['discount_percent'];
+				$offer->save();
+				return Redirect::route('offers')->with('success','Offer Successfully Added');
+			}
+
+		}
+	}
+
+	public function delete_offer($id){
+		if(Auth::user()->level <= 5 && (Auth::user()->customer_code == Offer::where('id',$id)->first()->customer_code)){
+			$offer = Offer::where('id',$id)->first();
+			if($offer->delete()){
+				return Redirect::route('offers')->with('success','Offer Successfully Deleted');
+			}
+			else{
+				return Redirect::route('ofers')->with('failure','An Error Occured While Deleting Offer!!! Please Try Again!!!');
+			}
+		}
+		else{
+			return Redirect::route('offers')->with('failure','Access Denied');
 		}
 	}
 	
