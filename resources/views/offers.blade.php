@@ -34,7 +34,7 @@
                         <div class="ibox-title">
                             <h5>Offers list</h5>
                             <div class="ibox-tools">
-                                <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal5">Add new device</a>
+                                <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal5">Add new offer</a>
 
 
                             </div>
@@ -71,7 +71,7 @@
                                 @endforeach
                                 @else
                                 <tr class="gradeX">
-                                    <td colspan="5"><center>NO DEVICE ADDED</center></td>
+                                    <td colspan="5"><center>NO OFFER ADDED</center></td>
                                 </tr>
                                 @endif
                             </tbody>

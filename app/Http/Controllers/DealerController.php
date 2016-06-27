@@ -120,6 +120,7 @@ public function offers(){
 				}
 				$offer = new Offer;
 				$offer->refill_type = $data['refill_type'];
+				$offer->customer_code = Auth::user()->customer_code;
 				$offer->discount_volume = $data['discount_volume'];
 				$offer->discount_percent = $data['discount_percent'];
 				$offer->save();
