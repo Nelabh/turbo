@@ -12,7 +12,7 @@ class Offer extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'customer_code', 'refill_type', 'discount_percent',
+        'customer_code', 'refill_type', 'discount_percent','discount_volume'
     ];
 
     /**
