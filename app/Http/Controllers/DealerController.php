@@ -114,7 +114,7 @@ public function offers(){
 				return Redirect::back()->withErrors($validator->errors())->withInput();
 			}
 			else {
-				if(Device::where('discount_percent',$data['discount_percent'])->
+				if(Offer::where('discount_percent',$data['discount_percent'])->
 						where('discount_volume',$data['discount_volume'])->first()){
 					return Redirect::route('offers')->with('failure','Offer Already Exists');
 				}

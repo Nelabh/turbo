@@ -9,11 +9,11 @@
     <div id="wrapper">
         @include('leftnavigation_dealer')
         <div id="page-wrapper" class="gray-bg dashbard-1">
-         @include('topnavigation')
+           @include('topnavigation')
 
 
-         <div class="wrapper wrapper-content animated fadeIn">
-             <div class="signup-form" id="error">
+           <div class="wrapper wrapper-content animated fadeIn">
+               <div class="signup-form" id="error">
                 @if($errors->has())
                 <p>
                   {{$errors->first('amount',':message')}} </p>
@@ -100,27 +100,9 @@
                     {{csrf_field()}}
 
                     <div class="modal-body">
-
-                            <!-- <div class="form-group"><label class="col-sm-2 control-label">Discount On :</label>
-
-                                    <div class="col-sm-10"><div class="i-checks"><label> <input required type="radio" value="diesel" name="type"> <i></i> Diesel </label></div>
-                                        <div class="i-checks"><label> <input type="radio"  value="petrol" name="type"> <i></i> Petrol </label></div>
-                                        <div class="i-checks"><label> <input type="radio"  id ="ft" value="ft" name="type"> <i></i> First Time Usage </label></div>
-                                          </div>
-                            <div class="input-group m-b"><label class="col-sm-2 control-label">Offer Availability</label>
-                                <div class="col-sm-10"><input type="text" name = "amount" id ="amount" placeholder = "Discount Available After Specified Amount Of Fuel Purchase" required class="form-control"><span class="input-group-addon">Liters</span></div>
-                            </div>  
-                        
-                            <div class="input-group m-b"><label class="col-sm-2 control-label">Discount Percentage</label>
-                                <div class="col-sm-10"><input type="text" name = "percent" id ="discount" maxlength = "2" placeholder = "Percentage Of Discount" required class="form-control"><span class="input-group-addon">%</span></div>
-                            </div>  
-                            <div class="input-group m-b"><input type="text" class="form-control"> <span class="input-group-addon"
-                            >.00</span></div>
-                        -->
-
                         <div class="form-group"><label class="col-sm-2 control-label">Discount On :</label>
 
-                            <div class="col-sm-10"><select class="form-control m-b" required name="refill_value" onchange = "handler()" id="refill">
+                            <div class="col-sm-10"><select class="form-control m-b" required name="refill_type" onchange = "handler()" id="refill">
                                 <option value = "" >Select Refill Type</option>
                                 <option value = "ft">First Timers</option>
                                 <option value = "diesel">Diesel</option>
@@ -128,17 +110,17 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group"><label class="col-sm-2 control-label">Offer Availability</label>
+                    <div id = "amt" class="form-group"><label class="col-sm-2 control-label">Offer Availability</label>
 
                         <div class="col-sm-10">
-                            <div class="input-group m-b"><input type="text" name = "amount" id ="amount" placeholder = "Discount Available After Specified Amount Of Fuel Purchase" required  class="form-control"> <span class="input-group-addon">Liters</span></div>
+                            <div class="input-group m-b"><input type="text" name = "discount_volume" id ="amount" placeholder = "Discount Available After Specified Amount Of Fuel Purchase" required  class="form-control"> <span class="input-group-addon">Liters</span></div>
                         </div>
                     </div>
 
                     <div class="form-group"><label class="col-sm-2 control-label">Discount Percentage</label>
 
                         <div class="col-sm-10">
-                            <div class="input-group m-b"><input type="text" class="form-control" name = "percent" id ="percent" maxlength = "2" placeholder = "Percentage Of Discount" required> <span class="input-group-addon">%</span></div>
+                            <div class="input-group m-b"><input type="text" class="form-control" name = "discount_percent" id ="percent" maxlength = "2" placeholder = "Percentage Of Discount" required> <span class="input-group-addon">%</span></div>
                         </div>
                     </div>
                     
@@ -174,17 +156,18 @@ $(document).ready(function() {
     $('.footable').footable();
     $('.footable2').footable();
 
+
 });
 
 function handler() {
     var str = document.getElementById("refill").value; 
     if(!str.localeCompare("ft")){
         document.getElementById("amount").value = "0";
-        document.getElementById("amount").disabled = true;
-    }else{
+        $('#amt').hide();
+     }else{
         document.getElementById("amount").value = "";
-        document.getElementById("amount").disabled = false;
-
+        $('#amt').show();
+        
     }
     
 }
