@@ -34,3 +34,5 @@ Route::get('delete_dealer/{id}',array('as'=>'delete_dealer','uses'=>'AdminContro
 
 Route::post('check_device',array('as'=>'device','uses'=>'ApiController@check_device'));
 Route::post('check_vehicle',array('as'=>'vehicle','uses'=>'ApiController@check_vehicle'));
+Route::post('register',array('as'=>'register','uses'=>'ApiController@register'));
+Route::post('fills',array('as'=>'fills','uses'=>'ApiController@fills'));
