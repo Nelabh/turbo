@@ -20,6 +20,7 @@ class CreateCustomersTable extends Migration
         $table->string('email');
         $table->string('contact');
         $table->string('total_volume')->default('0');
+        $table->timestamps();
         $table->foreign('customer_code')->references('customer_code')->on('admin')->onDelete('cascade');
         
      });
