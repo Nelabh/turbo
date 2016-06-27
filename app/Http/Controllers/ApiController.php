@@ -150,11 +150,14 @@ public function fills(){
 	$customer->total_volume += $data['fill_volume'];
 	$customer->save();
 
-	if($data['petrol']=='1'){
+	if($data['petrol']=='1')
 		$trans->type = 'petrol';
-	}
+	
 	else
 		$trans->type = 'diesel';
+
+
+	$trans->save();
 
 
 	if(!$data['reference_flag'])
@@ -171,7 +174,7 @@ public function fills(){
 
 			}
 		}
-		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t);
+		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id);
 		return response()->json($f);
 
 
@@ -190,24 +193,59 @@ public function fills(){
 
 			}
 		}
-		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t);
+		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id);
 		return response()->json($f);
+
+
+
+
 
 
 
 
 	}
 
+}
+public function calc(){
+	$data = Input::all();
+	$device=Device::where('device_id',$data['device_id'])->first()->customer_code;
+	$dealer = Dealer::where('customer_code',$device)->first();
+	$trans = Transaction::where('id',$data['transaction_id'])->first();
+
+
+	if($data['petrol']==1)
+	{
+
+		$calc = $data['volume']*$dealer->petrol_price;
+		$trans->rate = $dealer->petrol_price;
+	}
+	else
+	{
+		$calc = $data['volume']*$dealer->diesel_price;
+		$trans->rate = $dealer->diesel_price;
+
+
+	}
+
+
+	if($data['flag_discount'])
+	{
+		$discount=Offer::where('id',$data['discount_id'])->first();
+		$ret = $calc;
+		$calc=$calc-($discount->discount_percent/100)*$calc;
+	}
+
+	$trans->total_cost=$calc;
+	$trans->save();
+
+	if($data['petrol']==1)
+		return $dealer->petrol_price;
+	else
+		return $dealer->diesel_price;
+
 
 
 }
-
-
-
-
-
-
-
 
 }
 
