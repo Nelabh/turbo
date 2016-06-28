@@ -13,8 +13,9 @@ class CreateTransactionTable extends Migration
     public function up()
     {
         
-     Schema::create('transaction', function (Blueprint $table) {
+       Schema::create('transaction', function (Blueprint $table) {
         $table->increments('id');
+        $table->string('customer_code');
         $table->string('vehicle_number');
         $table->string('volume');
         $table->string('device_id');
@@ -22,9 +23,10 @@ class CreateTransactionTable extends Migration
         $table->string('rate');
         $table->string('total_cost');
         $table->timestamps();
+        $table->foreign('customer_code')->references('customer_code')->on('admin')->onDelete('cascade');
         $table->foreign('device_id')->references('device_id')->on('devices')->onDelete('cascade');
-     });
-    }
+    });
+   }
 
     /**
      * Reverse the migrations.

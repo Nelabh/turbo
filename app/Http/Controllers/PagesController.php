@@ -44,12 +44,14 @@ class PagesController extends BaseController
 		}
 		else {
 			if(Auth::attempt($data)){
-				$check = Dealer::where('customer_code',$data['customer_code'])->first();
-				
-				if($check->petrol_price == "" || $check->diesel_price == "")
-					Session::put('check','1');
-				Session::put('diesel_price',$check->diesel_price);
-				Session::put('petrol_price',$check->petrol_price);
+				if(Auth::user()->level <= 5){
+					$check = Dealer::where('customer_code',$data['customer_code'])->first();
+					
+					if($check->petrol_price == "" || $check->diesel_price == "")
+						Session::put('check','1');
+					Session::put('diesel_price',$check->diesel_price);
+					Session::put('petrol_price',$check->petrol_price);
+				}
 
 				return Redirect::intended('dashboard')->with('success','Successfully Logged In');
 			}
