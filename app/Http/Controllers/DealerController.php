@@ -156,6 +156,8 @@ public function save_settings(){
 	$dealer = Dealer::where('customer_code',Auth::user()->customer_code)->first();
 	$dealer->petrol_price = $data['petrol_price'];
 	$dealer->diesel_price = $data['diesel_price'];
+	Session::put('petrol_price',$data['petrol_price']);
+	Session::put('diesel_price',$data['diesel_price']);
 	$dealer->save();
 	Session::forget('check');
 	return Redirect::route('dashboard')->with('success','Settings Successfully Saved');

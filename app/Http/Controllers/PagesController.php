@@ -48,7 +48,9 @@ class PagesController extends BaseController
 				
 				if($check->petrol_price == "" || $check->diesel_price == "")
 					Session::put('check','1');
-				
+				Session::put('diesel_price',$check->diesel_price);
+				Session::put('petrol_price',$check->petrol_price);
+
 				return Redirect::intended('dashboard')->with('success','Successfully Logged In');
 			}
 			else{
