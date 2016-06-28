@@ -27,7 +27,8 @@ class DealerController extends BaseController
 	public static function dealers(){
 		if(Auth::user() -> level <= 5){
 			$action = "Dashboard";
-			return View::make('dashboard_dealer', compact('action'));
+			$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
+			return View::make('dashboard_dealer', compact('action','name'));
 		}
 		else{
 			return Redirect::route('home');
@@ -37,7 +38,9 @@ class DealerController extends BaseController
 		if(Auth::user()->level <= 5){
 			$action = "Devices";
 			$devices = Device::where('customer_code',Auth::user()->customer_code)->get();
-			return View::make('devices',compact('action','devices'));
+			$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
+
+			return View::make('devices',compact('action','devices','name'));
 		}
 		else{
 			return Redirect::route('home');
@@ -92,7 +95,9 @@ class DealerController extends BaseController
 		if(Auth::user()->level <= 5){
 			$action = "Offers";
 			$offers = Offer::where('customer_code',Auth::user()->customer_code)->get();
-			return View::make('offers',compact('action','offers'));
+			$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
+
+			return View::make('offers',compact('action','offers','name'));
 		}
 		else{
 			return Redirect::route('home');
@@ -146,5 +151,13 @@ public function delete_offer($id){
 
 	
 }
-
+public function save_settings(){
+	$data = Input::all();
+	$dealer = Dealer::where('customer_code',Auth::user()->customer_code)->first();
+	$dealer->petrol_price = $data['petrol_price'];
+	$dealer->diesel_price = $data['diesel_price'];
+	$dealer->save();
+	Session::forget('check');
+	return Redirect::route('dashboard')->with('success','Settings Successfully Saved');
+}
 }

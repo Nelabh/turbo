@@ -44,8 +44,12 @@ class PagesController extends BaseController
 		}
 		else {
 			if(Auth::attempt($data)){
-				Session::put('customer_code',$data['customer_code']);
-				return Redirect::intended('dashboard');
+				$check = Dealer::where('customer_code',$data['customer_code'])->first();
+				
+				if($check->petrol_price == "" || $check->diesel_price == "")
+					Session::put('check','1');
+				
+				return Redirect::intended('dashboard')->with('success','Successfully Logged In');
 			}
 			else{
 				return Redirect::route('home')->with('message','Your Customer Code / Password combination is incorrect!')->withInput();
@@ -55,16 +59,16 @@ class PagesController extends BaseController
 
 	public function dashboard(){
 		if(Auth::check()){
-		if(Auth::user()->level>=10){
-			return AdminController::admin();
+			if(Auth::user()->level>=10){
+				return AdminController::admin();
+			}
+			else{
+				return DealerController::dealers();
+			}
 		}
 		else{
-			return DealerController::dealers();
+			return Redirect::route('home');
 		}
-	}
-	else{
-		return Redirect::route('home');
-	}
 		
 	}
 

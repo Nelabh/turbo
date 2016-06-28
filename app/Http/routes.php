@@ -25,6 +25,7 @@ Route::post('add_dealer',array('as'=>'add_dealer','uses'=>'AdminController@add_d
 Route::get('devices',array('as'=>'devices','uses'=>'DealerController@devices'));
 Route::get('offers',array('as'=>'offers','uses'=>'DealerController@offers'));
 Route::post('add_offer',array('as'=>'add_offer','uses'=>'DealerController@add_offer'));
+Route::post('save_settings',array('as'=>'save_settings','uses'=>'DealerController@save_settings'));
 Route::post('add_device',array('as'=>'add_device','uses'=>'DealerController@add_device'));
 Route::get('delete_device/{id}',array('as'=>'delete_device','uses'=>'DealerController@delete_device'));
 Route::get('delete_offer/{id}',array('as'=>'delete_offer','uses'=>'DealerController@delete_offer'));

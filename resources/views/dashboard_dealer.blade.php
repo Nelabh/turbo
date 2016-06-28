@@ -12,6 +12,66 @@
             @include('topnavigation')
             <div class="wrapper wrapper-content animated fadeIn">
 
+
+ <div class="row">
+
+               <div class="col-lg-3">
+                <div class="widget style1 red-bg">
+                        <div class="row">
+                            <div class="col-xs-4 text-center">
+                                <i class="fa fa-trophy fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Total income </span>
+                                <h2 class="font-bold">$ 4,232</h2>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="widget style1 navy-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-cloud fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span> Today degrees </span>
+                            <h2 class="font-bold">26'C</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="widget style1 lazur-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-envelope-o fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span> New messages </span>
+                            <h2 class="font-bold">260</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="widget style1 yellow-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-music fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span> New albums </span>
+                            <h2 class="font-bold">12</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+           
+
                 <div class="p-w-md m-t-sm">
                     <div class="row">
 
@@ -134,73 +194,11 @@
                     </div>
 
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="ibox">
-
-
-
-                                <div class="ibox-content">
-
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label class="control-label" for="product_name">Device IMEI</label>
-                                                <input type="text" id="product_name" name="product_name" value="" placeholder="Project Name" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <label class="control-label" for="price">Name</label>
-                                                <input type="text" id="price" name="price" value="" placeholder="Name" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <label class="control-label" for="quantity">Company</label>
-                                                <input type="text" id="quantity" name="quantity" value="" placeholder="Company" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label class="control-label" for="status">Status</label>
-                                                <select name="status" id="status" class="form-control">
-                                                    <option value="1" selected="">Completed</option>
-                                                    <option value="0">Pending</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Master project</td>
-                                                    <td>Patrick Smith</td>
-                                                    <td>$892,074</td>
-                                                    <td>Inceptos Hymenaeos Ltd</td>
-                                                    <td><strong>20%</strong></td>
-                                                    <td>Jul 14, 2015</td>
-                                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    
                 </div>
 
 
             </div>
-
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="wrapper wrapper-content">
@@ -216,6 +214,98 @@
     </div>
 
     @include('js')
+@if(Session::has('check'))
+    @if(Session::get('check'))
+    <script type="text/javascript">
+    $(window).load(function(){
+        $('#check').modal('show');
+    });
+    </script>
+    @endif
+    @endif
+    <script type="text/javascript">
+
+document.getElementById('diesel').addEventListener('keydown', function(e)
+  {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: Ctrl+C
+            (e.keyCode == 67 && e.ctrlKey === true) ||
+             // Allow: Ctrl+X
+            (e.keyCode == 88 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+
+document.getElementById('petrol').addEventListener('keydown', function(e)
+  {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: Ctrl+C
+            (e.keyCode == 67 && e.ctrlKey === true) ||
+             // Allow: Ctrl+X
+            (e.keyCode == 88 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+</script>
+
+@if(Session::has('success'))
+<script>
+$(document).ready(function() {
+    setTimeout(function() {
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 4000
+        };
+        toastr.success("{{Session::get('success')}}");
+
+    }, 1300);
+
+});
+</script>
+@endif
+
+@if(Session::has('failure'))
+<script>
+$(document).ready(function() {
+    setTimeout(function() {
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 4000
+        };
+        toastr.error("{{Session::get('failure')}}");
+
+    }, 1300);
+
+});
+</script>
+@endif
+
     <script>
     $(document).ready(function() {
 

@@ -31,7 +31,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
-                <a href = "{{URL::asset('#')}}"><small>Forgot password?</small></a>
             </form>
         
                 @if($errors->has())
