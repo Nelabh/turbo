@@ -50,7 +50,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span>Registered customers</span>
-                            <h2 class="font-bold">{{ $cust }}</h2>
+                            <h2 class="font-bold">{{ count($cust) }}</h2>
                         </div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                                     @if($transaction)
                                     @foreach($transaction as $t)
                                     <tr class="gradeX">
-                                        <td>{{$deal->customer}}</td>
+                                        <td>{{$t->customer}}</td>
                                         <td>{{$t->vehicle_number}}</td>
                                         <td>{{$t->type}}</td>
                                         <td class="center">{{$t->volume}}</td>
