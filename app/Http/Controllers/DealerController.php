@@ -60,7 +60,11 @@ class DealerController extends BaseController
 				$counter++;
 			}
 
-			return View::make('dashboard_dealer', compact('action','name','dealer','counter','cust','total' ,'income','transaction','customer_name'));
+			foreach ($transaction as $transac) {
+				$transac->customer = Customer::where('vehicle_number',$transac->vehicle_number)->first()->name;
+			}
+
+			return View::make('dashboard_dealer', compact('action','name','dealer','counter','cust','total' ,'income','transaction'));
 		}
 		else{
 			return Redirect::route('home');
