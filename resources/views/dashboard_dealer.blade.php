@@ -3,6 +3,8 @@
 
 <head>
     @include('header')
+
+
 </head>
 
 <body>
@@ -71,15 +73,15 @@
             </div>
 
 
-            
+
 
             <div class="p-w-md m-t-sm">
                 <div class="row">
 
-                 
+
                     <div class="col-sm-4">
                     </div>
-                    
+
                     <div class="col-sm-4 text-center">
 
                         <div class="row m-t-xs">
@@ -97,7 +99,7 @@
 
 
                         <table class="table small m-t-sm">
-                            
+
                         </table>
 
 
@@ -105,6 +107,7 @@
                     </div>
 
                 </div>
+
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -133,7 +136,7 @@
                       <p>  {{$errors->first('password',':message')}} </p>
                       <p>  {{$errors->first('city',':message')}} </p>
                       <p>  {{$errors->first('pump_name',':message')}} </p>
-                      
+
                       @endif
                   </div>
 
@@ -170,7 +173,7 @@
                                             <td class="center">{{$t->total_cost}}</td>
                                             <td class="center">{{$t->created_at}}</td>
 
-                                            
+
                                         </tr>
                                         @endforeach
                                         @else
@@ -197,7 +200,7 @@
 
 
 
-            
+
         </div>
 
 
@@ -312,49 +315,66 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
 
-    var sparklineCharts = function(){
-        $("#sparkline1").sparkline([34, 43, 43, 35, 44, 32, 44, 52], {
-            type: 'line',
-            width: '100%',
-            height: '50',
-            lineColor: '#1ab394',
-            fillColor: "transparent"
-        });
 
-        $("#sparkline2").sparkline([32, 11, 25, 37, 41, 32, 34, 42], {
-            type: 'line',
-            width: '100%',
-            height: '50',
-            lineColor: '#1ab394',
-            fillColor: "transparent"
-        });
+    var data1 = [ 
+    @for($i = 30 ; $i >= 0 ; $i-- )
+    @if(empty($petrol_graph))
+     @if($i == 0)
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0]
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0],   
+    @endif
+   
+  @else
+    @foreach($petrol_graph as $pg)
+    @if($i == 0)
+    @if($pg->date == date('Y-m-d',strtotime("-".$i." days")))
+    [{{explode('-',$pg->date)[2]}},{{$pg->volume}}]
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0]
+    @endif   
 
-        $("#sparkline3").sparkline([34, 22, 24, 41, 10, 18, 16,8], {
-            type: 'line',
-            width: '100%',
-            height: '50',
-            lineColor: '#1C84C6',
-            fillColor: "transparent"
-        });
-    };
-
-    var sparkResize;
-
-    $(window).resize(function(e) {
-        clearTimeout(sparkResize);
-        sparkResize = setTimeout(sparklineCharts, 500);
-    });
-
-    sparklineCharts();
-
-
-
-
-    var data1 = [
-    [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,20],[11,10],[12,13],[13,4],[14,7],[15,8],[16,12]
+    @else
+    @if($pg->date == date('Y-m-d',strtotime("-".$i." days")))
+    [{{explode('-',$pg->date)[2]}},{{$pg->volume}}],
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0],
+    @endif   
+    @endif
+    @endforeach
+    @endif
+  @endfor
     ];
     var data2 = [
-    [0,0],[1,2],[2,7],[3,4],[4,11],[5,4],[6,2],[7,5],[8,11],[9,5],[10,4],[11,1],[12,5],[13,2],[14,5],[15,2],[16,0]
+
+  @for($i = 30 ; $i >= 0 ; $i-- )
+  @if(empty($diesel_graph))
+     @if($i == 0)
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0]
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0],   
+    @endif
+   
+  @else
+    @foreach($diesel_graph as $pg)
+    @if($i == 0)
+    @if($pg->date == date('Y-m-d',strtotime("-".$i." days")))
+    [{{explode('-',$pg->date)[2]}},{{$pg->volume}}]
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0]
+    @endif   
+
+    @else
+    @if($pg->date == date('Y-m-d',strtotime("-".$i." days")))
+    [{{explode('-',$pg->date)[2]}},{{$pg->volume}}],
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0],
+    @endif   
+    @endif
+    @endforeach
+    @endif
+    @endfor
+  
     ];
     $("#flot-dashboard5-chart").length && $.plot($("#flot-dashboard5-chart"), [
         data1,  data2
@@ -405,7 +425,6 @@ $(document).ready(function() {
 });
 
 </script>
-
 
 </body>
 </html>
