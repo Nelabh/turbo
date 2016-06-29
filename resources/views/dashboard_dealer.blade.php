@@ -142,7 +142,7 @@
                     <div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-title">
-                                <h5>Dealers list</h5>
+                                <h5>Transactions</h5>
                             </div>
                             <div class="ibox-content">
                                 <input type="text" class="form-control input-sm m-b-xs" id="filter"
@@ -153,9 +153,9 @@
                                         <tr>
                                             <th>Customer Name</th>
                                             <th>Vehicle Number</th>
-                                            <th data-hide="phone,tablet">Type</th>
-                                            <th data-hide="phone,tablet">Volume filled</th>
-                                            <th data-hide="phone,tablet">Cost</th>
+                                            <th >Type</th>
+                                            <th >Volume filled</th>
+                                            <th >Cost</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
@@ -167,7 +167,6 @@
                                             <td>{{$t->vehicle_number}}</td>
                                             <td>{{$t->type}}</td>
                                             <td class="center">{{$t->volume}}</td>
-                                            <td class="center">{{$t->total_cost}}</td>
                                             <td class="center">{{$t->total_cost}}</td>
                                             <td class="center">{{$t->created_at}}</td>
 
