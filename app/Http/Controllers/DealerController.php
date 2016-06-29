@@ -36,6 +36,8 @@ class DealerController extends BaseController
 			$trans = Transaction::where('customer_code',Auth::user()->customer_code)->get()->pluck('volume');
 			$cost = Transaction::where('customer_code',Auth::user()->customer_code)->get()->pluck('total_cost');
 			$transaction = Transaction::where('customer_code',Auth::user()->customer_code)->get();
+			$cust = Customer::where('customer_code',Auth::user()->customer_code)->get();
+
 
 
 
@@ -58,7 +60,7 @@ class DealerController extends BaseController
 				$counter++;
 			}
 
-			return View::make('dashboard_dealer', compact('action','name','dealer','counter','cust','total' ,'income','transaction'));
+			return View::make('dashboard_dealer', compact('action','name','dealer','counter','cust','total' ,'income','transaction','customer_name'));
 		}
 		else{
 			return Redirect::route('home');

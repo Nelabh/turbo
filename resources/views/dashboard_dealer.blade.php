@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Today income</span>
-                            <h2 class="font-bold">&8377; {!! $income !!}</h2>
+                            <h2 class="font-bold">&#8377; {!! $income !!}</h2>
                         </div>
                     </div>
                 </div>
