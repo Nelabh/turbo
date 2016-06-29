@@ -166,7 +166,7 @@
                                 </thead>
                                 <tbody>
                                     @if($transaction)
-                                    @foreach($transaction as $t)
+                                    foreach($transaction as $t)
                                     <tr class="gradeX">
                                         <td>{{$deal->customer}}</td>
                                         <td>{{$t->vehicle_number}}</td>
