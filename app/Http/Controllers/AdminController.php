@@ -15,6 +15,8 @@ use Auth;
 use App\Admin;
 use App\Dealer;
 use App\Customer;
+use App\Transaction;
+
 use Hash;
 use DB;
 use Session;
@@ -31,15 +33,22 @@ class AdminController extends BaseController{
 		{  
 			$dealer = Dealer::all();
 			$total= Customer::all()->sum('total_volume');
+			$count = Customer::all()->count('name');
 			$transaction = DB::select(DB::raw("SELECT SUM(volume) as volume,SUM(total_cost) as cost,type,CAST(created_at as DATE) as date FROM `transaction` GROUP BY type,CAST(created_at as DATE)"));
+
 			//dd($transaction);
 			foreach ($dealer as $deal) {
 				$cust = count(Customer::where('customer_code',$deal->customer_code)->get());
-				$volume = Customer::where('customer_code',$deal->customer_code)->sum('total_volume');
+				$volume = Transaction::where('customer_code',$deal->customer_code)->get()->sum('volume');
+				$cost = Transaction::where('customer_code',$deal->customer_code)->get()->sum('total_cost');
 				$deal->customers = $cust;
 				$deal->volume  = $volume;
+				$deal->cost = $cost;
 			}
 			$dealer->total = $total;
+			$dealer->count = $count;
+			$tran = Transaction::all()->sum('total_cost');
+			$dealer->trans = $tran;
 			$action="Dashboard";
 			return View::make('dashboard_admin', compact('action','dealer'));
 		}
