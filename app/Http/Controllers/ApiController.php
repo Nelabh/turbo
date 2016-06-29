@@ -146,6 +146,8 @@ public function fills(){
 	$trans->vehicle_number = $data['vehicle_number'];
 	$trans->volume = $data['fill_volume'];
 
+
+
 	$customer = Customer::where('vehicle_number',$data['vehicle_number'])->first();
 	$customer->total_volume += $data['fill_volume'];
 	$customer->save();
@@ -157,13 +159,15 @@ public function fills(){
 		$trans->type = 'diesel';
 
 
-	$trans->save();
 
 
 	if(!$data['reference_flag'])
 	{
 
 		$device=Device::where('device_id',$data['device_id'])->first()->customer_code;
+		$trans->customer_code=$device;
+		$trans->save();
+		
 		$offer = Offer::where('customer_code',$device)->get();
 		$t =  array();
 		foreach($offer as $off )
@@ -183,6 +187,9 @@ public function fills(){
 	else 
 	{
 		$device=Device::where('device_id',$data['device_id'])->first()->customer_code;
+		$trans->customer_code=$devices;
+		$trans->save();
+
 		$offer = Offer::where('customer_code',$device)->where('refill_type','ft')->get();
 		$t =  array();
 		foreach($offer as $off )
