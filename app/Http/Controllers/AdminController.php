@@ -49,8 +49,29 @@ class AdminController extends BaseController{
 			$dealer->count = $count;
 			$tran = Transaction::all()->sum('total_cost');
 			$dealer->trans = $tran;
+
+
+			$transaction_chart = DB::select(DB::raw("SELECT SUM(volume) as volume,SUM(total_cost) as cost,type,CAST(created_at as DATE) as date  FROM `transaction` GROUP BY type,CAST(created_at as DATE)"));
+			$diesel_graph = [];
+			$petrol_graph = [];
+			
+
+
+			foreach ($transaction_chart as $tr){
+				if($tr->type == 'petrol'){
+					$petrol_graph[] = $tr;
+				}
+				else if($tr->type == 'diesel'){
+					$diesel_graph[] = $tr;
+
+				}
+
+			}
+
+
+
 			$action="Dashboard";
-			return View::make('dashboard_admin', compact('action','dealer'));
+			return View::make('dashboard_admin', compact('action','dealer','petrol_graph','diesel_graph'));
 		}
 	}
 	public function dealers(){

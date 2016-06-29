@@ -32,7 +32,7 @@
                 <div class="col-lg-3">
                     <div class="widget style1 navy-bg">
                         <div class="row">
-                            <div class="col-xs-4">
+                            <div class="col-xs-4 text-center" > 
                                 <i class="fa fa-male fa-5x"></i>
                             </div>
                             <div class="col-xs-8 text-right">
@@ -342,11 +342,65 @@ $(document).ready(function() {
 
 
 
-    var data1 = [
-    [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,20],[11,10],[12,13],[13,4],[14,7],[15,8],[16,12]
+    var data1 = [ 
+    @for($i = 30 ; $i >= 0 ; $i-- )
+    @if(empty($petrol_graph))
+     @if($i == 0)
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0]
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0],   
+    @endif
+   
+  @else
+    @foreach($petrol_graph as $pg)
+    @if($i == 0)
+    @if($pg->date == date('Y-m-d',strtotime("-".$i." days")))
+    [{{explode('-',$pg->date)[2]}},{{$pg->volume}}]
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0]
+    @endif   
+
+    @else
+    @if($pg->date == date('Y-m-d',strtotime("-".$i." days")))
+    [{{explode('-',$pg->date)[2]}},{{$pg->volume}}],
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0],
+    @endif   
+    @endif
+    @endforeach
+    @endif
+  @endfor
     ];
     var data2 = [
-    [0,0],[1,2],[2,7],[3,4],[4,11],[5,4],[6,2],[7,5],[8,11],[9,5],[10,4],[11,1],[12,5],[13,2],[14,5],[15,2],[16,0]
+
+  @for($i = 30 ; $i >= 0 ; $i-- )
+  @if(empty($diesel_graph))
+     @if($i == 0)
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0]
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0],   
+    @endif
+   
+  @else
+    @foreach($diesel_graph as $pg)
+    @if($i == 0)
+    @if($pg->date == date('Y-m-d',strtotime("-".$i." days")))
+    [{{explode('-',$pg->date)[2]}},{{$pg->volume}}]
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0]
+    @endif   
+
+    @else
+    @if($pg->date == date('Y-m-d',strtotime("-".$i." days")))
+    [{{explode('-',$pg->date)[2]}},{{$pg->volume}}],
+    @else
+    [{{explode('-',date('Y-m-d',strtotime("-".$i." days")))[2]}},0],
+    @endif   
+    @endif
+    @endforeach
+    @endif
+    @endfor
+  
     ];
     $("#flot-dashboard5-chart").length && $.plot($("#flot-dashboard5-chart"), [
         data1,  data2

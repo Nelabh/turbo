@@ -38,8 +38,9 @@ class DealerController extends BaseController
 			$cost = Transaction::where('customer_code',Auth::user()->customer_code)->get()->pluck('total_cost');
 			$transaction = Transaction::where('customer_code',Auth::user()->customer_code)->orderBy('created_at', 'desc')->get();
 			$cust = Customer::where('customer_code',Auth::user()->customer_code)->get();
+			$names =  Auth::user()->customer_code;
 
-			$transaction_chart = DB::select(DB::raw("SELECT SUM(volume) as volume,SUM(total_cost) as cost,type,CAST(created_at as DATE) as date FROM `transaction` GROUP BY type,CAST(created_at as DATE)"));
+			$transaction_chart = DB::select(DB::raw("SELECT SUM(volume) as volume,SUM(total_cost) as cost,type,CAST(created_at as DATE) as date  FROM `transaction` where `customer_code` = '$names' GROUP BY type,CAST(created_at as DATE)"));
 			$diesel_graph = [];
 			$petrol_graph = [];
 			
