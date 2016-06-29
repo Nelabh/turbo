@@ -19,11 +19,12 @@
                 <div class="widget style1 red-bg">
                         <div class="row">
                             <div class="col-xs-4 text-center">
-                                <i class="fa fa-trophy fa-5x"></i>
+                                <i class="fa fa-automobile fa-5x"></i>
                             </div>
                             <div class="col-xs-8 text-right">
-                                <span> Total income </span>
-                                <h2 class="font-bold">$ 4,232</h2>
+                                <span> Total volume sold </span>
+
+                                <h2 class="font-bold">{!! $total !!} ltr</h2>
                             </div>
                         </div>
                 </div>
@@ -32,11 +33,11 @@
                 <div class="widget style1 navy-bg">
                     <div class="row">
                         <div class="col-xs-4">
-                            <i class="fa fa-cloud fa-5x"></i>
+                            <i class="fa fa-inr fa-5x"></i>
                         </div>
                         <div class="col-xs-8 text-right">
-                            <span> Today degrees </span>
-                            <h2 class="font-bold">26'C</h2>
+                            <span> Today income</span>
+                            <h2 class="font-bold">&8377; {!! $income !!}</h2>
                         </div>
                     </div>
                 </div>
@@ -45,11 +46,11 @@
                 <div class="widget style1 lazur-bg">
                     <div class="row">
                         <div class="col-xs-4">
-                            <i class="fa fa-envelope-o fa-5x"></i>
+                            <i class="fa fa-male fa-5x"></i>
                         </div>
                         <div class="col-xs-8 text-right">
-                            <span> New messages </span>
-                            <h2 class="font-bold">260</h2>
+                            <span>Registered customers</span>
+                            <h2 class="font-bold">{{ $cust }}</h2>
                         </div>
                     </div>
                 </div>
@@ -58,11 +59,11 @@
                 <div class="widget style1 yellow-bg">
                     <div class="row">
                         <div class="col-xs-4">
-                            <i class="fa fa-music fa-5x"></i>
+                            <i class="fa fa-mobile fa-5x"></i>
                         </div>
                         <div class="col-xs-8 text-right">
-                            <span> New albums </span>
-                            <h2 class="font-bold">12</h2>
+                            <span> Registered Devices</span>
+                            <h2 class="font-bold">{!! $counter !!}</h2>
                         </div>
                     </div>
                 </div>
@@ -75,102 +76,28 @@
                 <div class="p-w-md m-t-sm">
                     <div class="row">
 
+                       
                         <div class="col-sm-4">
-                            <h1 class="m-b-xs">
-                                26,900
-                            </h1>
-                            <small>
-                                Sales in current month
-                            </small>
-                            <div id="sparkline1" class="m-b-sm"></div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Pages / Visit</small>
-                                    <h4>236 321.80</h4>
-                                </div>
-
-                                <div class="col-xs-4">
-                                    <small class="stats-label">% New Visits</small>
-                                    <h4>46.11%</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Last week</small>
-                                    <h4>432.021</h4>
-                                </div>
-                            </div>
-
                         </div>
-                        <div class="col-sm-4">
-                            <h1 class="m-b-xs">
-                                98,100
-                            </h1>
-                            <small>
-                                Sales in last 24h
-                            </small>
-                            <div id="sparkline2" class="m-b-sm"></div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Pages / Visit</small>
-                                    <h4>166 781.80</h4>
-                                </div>
-
-                                <div class="col-xs-4">
-                                    <small class="stats-label">% New Visits</small>
-                                    <h4>22.45%</h4>
-                                </div>
-                                <div class="col-xs-4">
-                                    <small class="stats-label">Last week</small>
-                                    <h4>862.044</h4>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="col-sm-4">
+                        
+                        <div class="col-sm-4 text-center">
 
                             <div class="row m-t-xs">
                                 <div class="col-xs-6">
-                                    <h5 class="m-b-xs">Income last month</h5>
-                                    <h1 class="no-margins">160,000</h1>
-                                    <div class="font-bold text-navy">98% <i class="fa fa-bolt"></i></div>
+                                    <h5 class="m-b-xs">Diesel Price</h5>
+                                    <h1 class="no-margins">{!!$dealer->diesel_price!!}</h1>
+                                    <div class="font-bold text-navy"><a  href="" data-toggle="modal" data-target="#check" >Change</a> <i class="fa fa-bolt"></i></div>
                                 </div>
                                 <div class="col-xs-6">
-                                    <h5 class="m-b-xs">Sals current year</h5>
-                                    <h1 class="no-margins">42,120</h1>
-                                    <div class="font-bold text-navy">98% <i class="fa fa-bolt"></i></div>
+                                    <h5 class="m-b-xs">Petrol Price</h5>
+                                    <h1 class="no-margins">{!!$dealer->petrol_price!!}</h1>
+                                    <div class="font-bold text-navy"><a href="" data-toggle="modal" data-target="#check">Change</a> <i class="fa fa-bolt"></i></div>
                                 </div>
                             </div>
 
 
                             <table class="table small m-t-sm">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>142</strong> Projects
-
-                                        </td>
-                                        <td>
-                                            <strong>22</strong> Messages
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>61</strong> Comments
-                                        </td>
-                                        <td>
-                                            <strong>54</strong> Articles
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>154</strong> Companies
-                                        </td>
-                                        <td>
-                                            <strong>32</strong> Clients
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                
                             </table>
 
 
@@ -182,16 +109,98 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="small pull-left col-md-3 m-l-lg m-t-md">
-                                <strong>Sales char</strong> have evolved over the years sometimes.
+                                <strong>View your</strong> sales of previous days graphically.
                             </div>
                             <div class="small pull-right col-md-3 m-t-md text-right">
-                                <strong>There are many</strong> variations of passages of Lorem Ipsum available, but the majority have suffered.
+                                <strong>Increase</strong> your sales.
                             </div>
                             <div class="flot-chart m-b-xl">
                                 <div class="flot-chart-content" id="flot-dashboard5-chart"></div>
                             </div>
                         </div>
                     </div>
+
+
+
+         <div class="wrapper wrapper-content animated fadeIn">
+             <div class="signup-form" id="error">
+                @if($errors->has())
+                <p>
+                  {{$errors->first('name',':message')}} </p>
+                  <p>  {{$errors->first('customer_code',':message')}} </p>
+                  <p>  {{$errors->first('contact',':message')}} </p>
+                  <p>  {{$errors->first('email',':message')}} </p>
+                  <p>  {{$errors->first('password',':message')}} </p>
+                  <p>  {{$errors->first('city',':message')}} </p>
+                  <p>  {{$errors->first('pump_name',':message')}} </p>
+                  
+                  @endif
+              </div>
+
+
+              <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Dealers list</h5>
+                            <div class="ibox-tools">
+                                <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal5">Add new dealer</a>
+
+
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                            placeholder="Search in table">
+
+                            <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                                <thead>
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th>Vehicle number</th>
+                                        <th data-hide="phone,tablet">Type</th>
+                                        <th data-hide="phone,tablet">Volume filled</th>
+                                        <th data-hide="phone,tablet">Cost</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if($transaction)
+                                    @foreach($transaction as $t)
+                                    <tr class="gradeX">
+                                        <td>{{$deal->customer}}</td>
+                                        <td>{{$t->vehicle_number}}</td>
+                                        <td>{{$t->type}}</td>
+                                        <td class="center">{{$t->volume}}</td>
+                                        <td class="center">{{$t->total_cost}}</td>
+                                        <td class="center">{{$t->total_cost}}</td>
+                                        <td class="center">{{$t->created_at}}</td>
+
+                                      
+                                    </tr>
+                                    @endforeach
+                                    @else
+                                    <tr class="gradeX">
+                                        <td colspan="6"><center>NO TRANSACTIONS DONE YET</center></td>
+                                    </tr>
+                                    @endif
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6">
+                                            <ul class="pagination pull-right"></ul>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
 
                     

@@ -17,6 +17,8 @@ use App\Dealer;
 use App\Offer;
 use App\Device;
 use Session;
+use App\Customer;
+use App\Transaction;
 class DealerController extends BaseController
 {
 	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
@@ -28,7 +30,35 @@ class DealerController extends BaseController
 		if(Auth::user() -> level <= 5){
 			$action = "Dashboard";
 			$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
-			return View::make('dashboard_dealer', compact('action','name'));
+			$dealer =Dealer::where('customer_code',Auth::user()->customer_code)->first();
+			$devices=Device::where('customer_code',Auth::user()->customer_code)->get()->pluck('device_id');
+			$cust = count(Customer::where('customer_code',Auth::user()->customer_code)->get());
+			$trans = Transaction::where('customer_code',Auth::user()->customer_code)->get()->pluck('volume');
+			$cost = Transaction::where('customer_code',Auth::user()->customer_code)->get()->pluck('total_cost');
+			$transaction = Transaction::where('customer_code',Auth::user()->customer_code)->get();
+
+
+
+
+			$total=0;
+			foreach($trans as $t)
+			{
+				$total = $total +$t;
+
+			}
+			$income=0;
+			foreach($cost as $c)
+			{
+				$income =$income + $c;
+			}
+			
+			$counter=0;
+			foreach($devices as $d)
+			{
+				$counter++;
+			}
+
+			return View::make('dashboard_dealer', compact('action','name','dealer','counter','cust','total' ,'income','transaction'));
 		}
 		else{
 			return Redirect::route('home');
