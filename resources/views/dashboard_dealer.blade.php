@@ -142,12 +142,8 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Dealers list</h5>
-                            <div class="ibox-tools">
-                                <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal5">Add new dealer</a>
-
-
-                            </div>
+                            <h5>Transactions</h5>
+                            
                         </div>
                         <div class="ibox-content">
                             <input type="text" class="form-control input-sm m-b-xs" id="filter"
@@ -166,7 +162,7 @@
                                 </thead>
                                 <tbody>
                                     @if($transaction)
-                                    foreach($transaction as $t)
+                                    @foreach($transaction as $t)
                                     <tr class="gradeX">
                                         <td>{{$t->customer}}</td>
                                         <td>{{$t->vehicle_number}}</td>
