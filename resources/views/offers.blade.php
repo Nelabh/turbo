@@ -49,6 +49,7 @@
                                         <th>S. No.</th>
                                         <th>Discount Percent</th>
                                         <th>Discount Type</th>
+                                        <th>Discount Volume</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>

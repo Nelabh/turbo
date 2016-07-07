@@ -48,6 +48,7 @@
                                     <tr>
                                         <th>S. No.</th>
                                         <th>Device IMEI</th>
+                                        <th>Device PIN</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -57,8 +58,8 @@
                                     @foreach($devices as $devi)
                                     <tr class="gradeX">
                                         <td>{{$i}}</td>
-                                        <td>{{$devi->device_id}}
-                                        </td>
+                                        <td>{{$devi->device_id}}</td>
+                                        <td>{{$devi->device_pin}}</td>
                                         <td><a href = "{{URL::route('delete_device',$devi->device_id)}}"class="btn btn-outline btn-danger" type="button">
                                             <i class="fa fa-trash-o"></i> <span class="bold">Delete</span>
                                         </a>
