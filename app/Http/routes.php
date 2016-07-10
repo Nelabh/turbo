@@ -39,4 +39,4 @@ Route::post('check_vehicle',array('as'=>'vehicle','uses'=>'ApiController@check_v
 Route::post('register',array('as'=>'register','uses'=>'ApiController@register'));
 Route::post('fills',array('as'=>'fills','uses'=>'ApiController@fills'));
 Route::post('calc',array('as'=>'calc','uses'=>'ApiController@calc'));
-
+Route::post('check',array('as'=>'check','uses'=>'ApiController@check'));

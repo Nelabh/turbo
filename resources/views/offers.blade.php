@@ -59,7 +59,7 @@
                                     @foreach($offers as $offer)
                                     <tr class="gradeX">
                                         <td>{{$i}}</td>
-                                        <td>{{$offer->discount_percent}}
+                                        <td>{{$offer->discount_percent}}%
                                         </td>
                                         <td>{{$offer->refill_type}}</td>
                                         <td>{{$offer->discount_volume}}</td>

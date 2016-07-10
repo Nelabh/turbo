@@ -250,9 +250,18 @@ public function calc(){
 	else
 		return $dealer->diesel_price;
 
-
-
 }
+ public function check(){
+ 	$data = Input::all();
+ 	$use = "username";
+ 	$pass = "password";
+ 	if($use == $data['username']&& $pass == $data['password']){
+ 		return "Correct";
+ 	}else{
+ 		return "Not Correct";
+ 	}
+ }
+
 
 }
 
