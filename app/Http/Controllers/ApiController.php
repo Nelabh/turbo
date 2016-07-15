@@ -265,7 +265,7 @@ public function calc(){
 
 }
 
-/*public function check_vehicle(){     //device id vehicle
+public function check_vehicle(){     //device id vehicle
 	$data = Input::all();
 	if(Customer::where('vehicle_number',$data['vehicle_number'])->first()){
 		return '110'   //DEPICTS LOGIN
@@ -365,5 +365,5 @@ discount AVAILED
 
 
 
-*/
+
 
