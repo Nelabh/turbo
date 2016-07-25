@@ -108,6 +108,8 @@
                                 <option value = "ft">First Timers</option>
                                 <option value = "diesel">Diesel</option>
                                 <option value = "petrol">Petrol</option>
+                                <option value = "speed">Speed</option>
+
                             </select>
                         </div>
                     </div>
