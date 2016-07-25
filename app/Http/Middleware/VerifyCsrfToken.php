@@ -16,5 +16,7 @@ class VerifyCsrfToken extends BaseVerifier
         'check_device',
         'register',
         'fills',
+        'check',
+        'check2'
     ];
 }

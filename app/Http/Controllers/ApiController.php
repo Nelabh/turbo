@@ -16,6 +16,7 @@ use App\Reference;
 use App\Customer;
 use App\Transaction;
 use App\Offer;
+use DB;
 class ApiController extends BaseController
 {
 	use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
@@ -251,18 +252,41 @@ public function calc(){
 		return $dealer->diesel_price;
 
 }
- public function check(){
- 	$data = Input::all();
- 	$use = "username";
- 	$pass = "password";
- 	if($use == $data['username']&& $pass == $data['password']){
- 		return "Correct";
- 	}else{
- 		return "Not Correct";
- 	}
- }
 
 
+
+
+/*
+*****************
+FOR ABHINAV******
+*****************
+
+*/
+public function check(){
+	$data = Input::all();
+	$user = DB::table('tester')->where('username',$data['username'])->first();
+	if(count($user)){
+		return "User Already Exists";
+	}
+	if($data['password'] == $data['repassword']){
+		DB::table('tester')->insert(['name'=>$data['name'],'username'=>$data['username'],
+			'password'=>$data['password'],'phone'=>$data['phone'],'email'=>$data['email']]);
+		return 'Successfully Registered';
+	}
+	return 'Password Dont Match';
+}
+public function check2(){
+	$data = Input::all();
+	$user = DB::table('tester')->where('username',$data['username'])->first();
+	if(count($user)){
+		if($user->password == $data['password']){
+			return "Login Successfully";
+		}
+		return "Incorrect Password";
+	}
+	return "Incorrect Username";
+	
+}
 }
 
 /*public function check_vehicle(){     //device id vehicle

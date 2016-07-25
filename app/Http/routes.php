@@ -40,3 +40,4 @@ Route::post('register',array('as'=>'register','uses'=>'ApiController@register'))
 Route::post('fills',array('as'=>'fills','uses'=>'ApiController@fills'));
 Route::post('calc',array('as'=>'calc','uses'=>'ApiController@calc'));
 Route::post('check',array('as'=>'check','uses'=>'ApiController@check'));
+Route::post('check2',array('as'=>'check2','uses'=>'ApiController@check2'));

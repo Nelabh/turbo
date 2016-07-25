@@ -63,16 +63,30 @@
                             <div class="modal-body">
                                 {{csrf_field()}}
                                 <p><strong>Kindly Enter The Following Details</strong> </p>
-                                <div class="form-group"><label class="col-sm-2 control-label">Diesel Price</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">Speed Price</label>
+
+                                    <div class="col-sm-10">
+                                        <div class="input-group m-b"><span class="input-group-addon ">&#8377;</span> 
+                                            @if(Session::has('speed_price'))
+                                            <input type="text" value ="{{Session::get('speed_price')}}" required id ="speed"  name = "speed_price" class="form-control"> <span class="input-group-addon">per ltr</span>
+                                            @else
+                                            <input type="text"  required id ="speed"  name = "speed_price" class="form-control"> <span class="input-group-addon">per ltr</span>
+
+                                            @endif
+                                            </div>
+                                    </div>
+                                </div>
+                                   <div class="form-group"><label class="col-sm-2 control-label">Diesel Price</label>
 
                                     <div class="col-sm-10">
                                         <div class="input-group m-b"><span class="input-group-addon ">&#8377;</span> 
                                             @if(Session::has('diesel_price'))
-                                            <input type="text" value ="{{Session::get('diesel_price')}}" required id ="diesel"  name = "diesel_price" class="form-control"> <span class="input-group-addon">per ltr</span></div>
+                                            <input type="text" value ="{{Session::get('diesel_price')}}" required id ="diesel"  name = "diesel_price" class="form-control"> <span class="input-group-addon">per ltr</span>
                                             @else
-                                            <input type="text"  required id ="diesel"  name = "diesel_price" class="form-control"> <span class="input-group-addon">per ltr</span></div>
+                                            <input type="text"  required id ="diesel"  name = "diesel_price" class="form-control"> <span class="input-group-addon">per ltr</span>
 
                                             @endif
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="form-group"><label class="col-sm-2 control-label">Petrol Price</label>
@@ -81,11 +95,12 @@
                                         <div class="input-group m-b"><span class="input-group-addon">&#8377;  </span> 
                                             @if(Session::has('petrol_price'))
 
-                                            <input type="text" required id ="petrol" value ="{{Session::get('petrol_price')}}" name = "petrol_price" class="form-control"> <span class="input-group-addon">per ltr</span></div>
+                                            <input type="text" required id ="petrol" value ="{{Session::get('petrol_price')}}" name = "petrol_price" class="form-control"> <span class="input-group-addon">per ltr</span>
                                             @else
-                                            <input type="text" required id ="petrol" name = "petrol_price" class="form-control"> <span class="input-group-addon">per ltr</span></div>
+                                            <input type="text" required id ="petrol" name = "petrol_price" class="form-control"> <span class="input-group-addon">per ltr</span>
 
                                             @endif
+                                            </div>
                                     </div>
                                 </div>
                             </div>
