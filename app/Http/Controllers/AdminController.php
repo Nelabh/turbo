@@ -138,5 +138,8 @@ class AdminController extends BaseController{
 			return Redirect::route('devices')->with('failure','Access Denied');
 		}
 	}
+	public function view_users(){
+		return view::make('view_users');
+	}
 	
 }
