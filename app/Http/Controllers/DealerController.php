@@ -184,9 +184,28 @@ public function add_offer(){
 		}
 		$offer = new Offer;
 		$offer->refill_type = $data['refill_type'];
+		$offer->type = $data['type'];
 		$offer->customer_code = Auth::user()->customer_code;
 		$offer->discount_volume = $data['discount_volume'];
-		$offer->discount_percent = $data['discount_percent'];
+		
+		if($data['type']=="rupees")
+		{
+		$offer->discount_objects = $data['rupees'];
+			$offer->quantity = 0;
+			
+		}
+		else if($data['type']=="percent")
+		{
+			$offer->discount_percent = $data['discount_percent'];
+			$offer->quantity = 0;
+		}
+		
+	 	else
+	 	{
+		$offer->discount_objects = $data['item_list'];
+		$offer->quantity = $data['quantity'];
+
+	 	}
 		$offer->save();
 		return Redirect::route('offers')->with('success','Offer Successfully Added');
 	}

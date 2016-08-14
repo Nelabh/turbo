@@ -120,7 +120,7 @@
 
                     <div class="form-group"><label class="col-sm-2 control-label">Type of Offer in :</label>
 
-                        <div class="col-sm-10"><select class="form-control m-b" required name="refill_type" onchange = "hider()" id = "type">
+                        <div class="col-sm-10"><select class="form-control m-b" required name="type" onchange = "hider()" id = "type">
                             <option value = "" >Select Type</option>
                             <option value = "rupees">Rupees</option>
                             <option value = "percent">Percent</option>
@@ -154,10 +154,10 @@
 
                     <div class="col-sm-10">
                        <div class="col-sm-10"><select class="form-control m-b" onchange ="checkitem()"  required name="item_list" id = "item_list">
-                        <option value = "" >Select Item</option>
+                        <option selected value = "" >Select Item</option>
                        
                         @foreach($items as $item)
-                        <option value = "{{$item->id}}" >{{$item->item}}</option>
+                        <option value = "{{$item->id}}">{{$item->item}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -169,7 +169,7 @@
         <div style = "display:none;" id = "item_qty" class="form-group"><label class="col-sm-2 control-label">Quantity</label>
 
             <div class="col-sm-10">
-               <div class="col-sm-10"><select class="form-control m-b" required name="item_list" id = "qty">
+               <div class="col-sm-10"><select class="form-control m-b" required name="quantity" id = "qty">
             </select>
         </div>
 
