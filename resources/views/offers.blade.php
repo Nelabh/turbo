@@ -109,10 +109,27 @@
                                 <option value = "diesel">Diesel</option>
                                 <option value = "petrol">Petrol</option>
                                 <option value = "speed">Speed</option>
+                                <option value = "reference">Reference</option>
+
 
                             </select>
                         </div>
                     </div>
+
+
+
+                      <div class="form-group"><label class="col-sm-2 control-label">Type of Offer in :</label>
+
+                            <div class="col-sm-10"><select class="form-control m-b" required name="refill_type" onchange = "hider()" id = "type">
+                                <option value = "" >Select Type</option>
+                                <option value = "rupees">Rupees</option>
+                                <option value = "percent">Percent</option>
+                                <option value = "item">Item</option>
+                            </select>
+                        </div>
+                    </div>
+
+
                     <div id = "amt" class="form-group"><label class="col-sm-2 control-label">Offer Availability</label>
 
                         <div class="col-sm-10">
@@ -120,12 +137,49 @@
                         </div>
                     </div>
 
-                    <div class="form-group"><label class="col-sm-2 control-label">Discount Percentage</label>
+                    <div style = "display:none;" id = "percent_disc" class="form-group"><label class="col-sm-2 control-label">Discount Percentage</label>
 
                         <div class="col-sm-10">
                             <div class="input-group m-b"><input type="text" class="form-control" name = "discount_percent" id ="percent" maxlength = "2" placeholder = "Percentage Of Discount" required> <span class="input-group-addon">%</span></div>
                         </div>
                     </div>
+
+                    <div style = "display:none;" id = "rupees_disc" class="form-group"><label class="col-sm-2 control-label">Discount Rupees</label>
+
+                        <div class="col-sm-10">
+                            <div class="input-group m-b"><input type="text" class="form-control" name = "discount_rupees" id ="rupees" maxlength = "5" placeholder = "Amount of Discount" required> <span class="input-group-addon">&#8377;</span></div>
+                        </div>
+                    </div>
+                     <div style = "display:none;" id = "item_disc" class="form-group"><label class="col-sm-2 control-label">Discount item</label>
+
+                        <div class="col-sm-10">
+                           <div class="col-sm-10"><select class="form-control m-b" required name="item_list" id = "item_list">
+                                <option value = "" >Select Item</option>
+
+                               
+                            </select>
+                        </div>
+
+
+
+                        </div>
+                    </div>
+                    <div style = "display:none;" id = "item_qty" class="form-group"><label class="col-sm-2 control-label">Quantity</label>
+
+                        <div class="col-sm-10">
+                           <div class="col-sm-10"><select class="form-control m-b" required name="item_list" id = "qty">
+                                <option value = "" >Quantity</option>
+
+
+                               
+                            </select>
+                        </div>
+                        
+
+
+                        </div>
+                    </div>
+                    
                     
 
                 </div>
@@ -164,7 +218,7 @@ $(document).ready(function() {
 
 function handler() {
     var str = document.getElementById("refill").value; 
-    if(!str.localeCompare("ft")){
+    if(!str.localeCompare("ft")||!str.localeCompare("reference")){
         document.getElementById("amount").value = "0";
         $('#amt').hide();
      }else{
@@ -175,6 +229,65 @@ function handler() {
     
 }
 
+function item(){
+    var str = document.getElementById('item_list').value;
+       jQuery.ajax({
+      url:"{{URL::route('item_list')}}",
+      type:"post",
+      data: {'item_id':str,'_token':jQuery('#token').val()},
+      success:function(data){
+        if(data.isNumeric()){
+            for( var i = data; i > 0;i--){
+
+            }
+        }
+        else{
+
+        }
+    }
+});
+}
+function hider(){
+    var str = document.getElementById("type").value;
+    if(!str.localeCompare("rupees")){
+        document.getElementById("percent").value = "0";
+        document.getElementById("item").value = "";
+        document.getElementById("qty").value = "";
+        $('#percent_disc').hide();
+        $('#item_disc').hide();
+        $('#rupees_disc').show();
+        $('#item_qty').hide();
+    }
+    else if(!str.localeCompare("percent")){
+         document.getElementById("rupees").value = "0";
+        document.getElementById("item").value = "";
+        document.getElementById("qty").value = "";
+        $('#percent_disc').show();
+        $('#item_disc').hide();
+        $('#rupees_disc').hide();
+        $('#item_qty').hide();
+    }
+    else if(!str.localeCompare("item")){
+         document.getElementById("rupees").value = "0";
+        document.getElementById("percent").value = "0";
+        document.getElementById("qty").value = "";
+        $('#percent_disc').hide();
+        $('#item_disc').show();
+        $('#rupees_disc').hide();
+        $('#item_qty').show();
+    }
+    else{
+           document.getElementById("rupees").value = "0";
+        document.getElementById("percent").value = "0";
+        document.getElementById("item").value = "";
+        document.getElementById("qty").value = "";
+
+        $('#percent_disc').hide();
+        $('#item_disc').hide();
+        $('#rupees_disc').hide();
+        $('#item_qty').hide();
+    }
+}
 </script>
 
 
