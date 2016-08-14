@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Offer extends Authenticatable
+class Product extends Authenticatable
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Offer extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'customer_code', 'refill_type', 'discount_percent','discount_volume','discount_object'
+        'customer_code', 'item', 'quantity'
     ];
 
     /**
@@ -20,6 +20,5 @@ class Offer extends Authenticatable
      *
      * @var array
      */
-
-    protected $table = "offers";
+    protected $table = "products";
 }

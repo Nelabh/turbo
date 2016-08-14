@@ -12,7 +12,7 @@ class Reference extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'reference_number', 'customer_id','flag'
+        'reference_number', 'customer_id','flag','discount_percent'
     ];
 
     /**
