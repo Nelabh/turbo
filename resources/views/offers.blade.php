@@ -118,77 +118,75 @@
 
 
 
-                      <div class="form-group"><label class="col-sm-2 control-label">Type of Offer in :</label>
+                    <div class="form-group"><label class="col-sm-2 control-label">Type of Offer in :</label>
 
-                            <div class="col-sm-10"><select class="form-control m-b" required name="refill_type" onchange = "hider()" id = "type">
-                                <option value = "" >Select Type</option>
-                                <option value = "rupees">Rupees</option>
-                                <option value = "percent">Percent</option>
-                                <option value = "item">Item</option>
-                            </select>
-                        </div>
+                        <div class="col-sm-10"><select class="form-control m-b" required name="refill_type" onchange = "hider()" id = "type">
+                            <option value = "" >Select Type</option>
+                            <option value = "rupees">Rupees</option>
+                            <option value = "percent">Percent</option>
+                            <option value = "item">Item</option>
+                        </select>
                     </div>
-
-
-                    <div id = "amt" class="form-group"><label class="col-sm-2 control-label">Offer Availability</label>
-
-                        <div class="col-sm-10">
-                            <div class="input-group m-b"><input type="text" name = "discount_volume" id ="amount" placeholder = "Discount Available After Specified Amount Of Fuel Purchase" required  class="form-control"> <span class="input-group-addon">Liters</span></div>
-                        </div>
-                    </div>
-
-                    <div style = "display:none;" id = "percent_disc" class="form-group"><label class="col-sm-2 control-label">Discount Percentage</label>
-
-                        <div class="col-sm-10">
-                            <div class="input-group m-b"><input type="text" class="form-control" name = "discount_percent" id ="percent" maxlength = "2" placeholder = "Percentage Of Discount" required> <span class="input-group-addon">%</span></div>
-                        </div>
-                    </div>
-
-                    <div style = "display:none;" id = "rupees_disc" class="form-group"><label class="col-sm-2 control-label">Discount Rupees</label>
-
-                        <div class="col-sm-10">
-                            <div class="input-group m-b"><input type="text" class="form-control" name = "discount_rupees" id ="rupees" maxlength = "5" placeholder = "Amount of Discount" required> <span class="input-group-addon">&#8377;</span></div>
-                        </div>
-                    </div>
-                     <div style = "display:none;" id = "item_disc" class="form-group"><label class="col-sm-2 control-label">Discount item</label>
-
-                        <div class="col-sm-10">
-                           <div class="col-sm-10"><select class="form-control m-b" required name="item_list" id = "item_list">
-                                <option value = "" >Select Item</option>
-
-                               
-                            </select>
-                        </div>
-
-
-
-                        </div>
-                    </div>
-                    <div style = "display:none;" id = "item_qty" class="form-group"><label class="col-sm-2 control-label">Quantity</label>
-
-                        <div class="col-sm-10">
-                           <div class="col-sm-10"><select class="form-control m-b" required name="item_list" id = "qty">
-                                <option value = "" >Quantity</option>
-
-
-                               
-                            </select>
-                        </div>
-                        
-
-
-                        </div>
-                    </div>
-                    
-                    
-
                 </div>
-                <div class="modal-footer">
-                    <button type="submit"  class="btn btn-primary">Add</button>
+
+
+                <div id = "amt" class="form-group"><label class="col-sm-2 control-label">Offer Availability</label>
+
+                    <div class="col-sm-10">
+                        <div class="input-group m-b"><input type="text" name = "discount_volume" id ="amount" placeholder = "Discount Available After Specified Amount Of Fuel Purchase" required  class="form-control"> <span class="input-group-addon">Liters</span></div>
+                    </div>
                 </div>
-            </form>
+
+                <div style = "display:none;" id = "percent_disc" class="form-group"><label class="col-sm-2 control-label">Discount Percentage</label>
+
+                    <div class="col-sm-10">
+                        <div class="input-group m-b"><input type="text" class="form-control" name = "discount_percent" id ="percent" maxlength = "2" placeholder = "Percentage Of Discount" required> <span class="input-group-addon">%</span></div>
+                    </div>
+                </div>
+
+                <div style = "display:none;" id = "rupees_disc" class="form-group"><label class="col-sm-2 control-label">Discount Rupees</label>
+
+                    <div class="col-sm-10">
+                        <div class="input-group m-b"><input type="text" class="form-control" name = "discount_rupees" id ="rupees" maxlength = "5" placeholder = "Amount of Discount" required> <span class="input-group-addon">&#8377;</span></div>
+                    </div>
+                </div>
+                <div style = "display:none;" id = "item_disc" class="form-group"><label class="col-sm-2 control-label">Discount item</label>
+
+                    <div class="col-sm-10">
+                       <div class="col-sm-10"><select class="form-control m-b" onchange ="checkitem()"  required name="item_list" id = "item_list">
+                        <option value = "" >Select Item</option>
+                       
+                        @foreach($items as $item)
+                        <option value = "{{$item->id}}" >{{$item->item}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+
+
+            </div>
         </div>
+        <div style = "display:none;" id = "item_qty" class="form-group"><label class="col-sm-2 control-label">Quantity</label>
+
+            <div class="col-sm-10">
+               <div class="col-sm-10"><select class="form-control m-b" required name="item_list" id = "qty">
+            </select>
+        </div>
+
+
+
     </div>
+</div>
+
+
+<input type = "hidden" name = "_token" id = "token" value = "{{csrf_token()}}">
+</div>
+<div class="modal-footer">
+    <button type="submit"  class="btn btn-primary">Add</button>
+</div>
+</form>
+</div>
+</div>
 </div>
 <div class="row">
     <div class="col-lg-12">
@@ -221,7 +219,7 @@ function handler() {
     if(!str.localeCompare("ft")||!str.localeCompare("reference")){
         document.getElementById("amount").value = "0";
         $('#amt').hide();
-     }else{
+    }else{
         document.getElementById("amount").value = "";
         $('#amt').show();
         
@@ -229,21 +227,24 @@ function handler() {
     
 }
 
-function item(){
+function checkitem(){
     var str = document.getElementById('item_list').value;
-       jQuery.ajax({
+    jQuery.ajax({
       url:"{{URL::route('item_list')}}",
       type:"post",
       data: {'item_id':str,'_token':jQuery('#token').val()},
       success:function(data){
-        if(data.isNumeric()){
+            $('#qty')
+            .find('option')
+            .remove()
+            .end();
             for( var i = data; i > 0;i--){
-
+                $('#qty').append($('<option>', {
+                    value: i,
+                    text: i
+                }));
             }
-        }
-        else{
-
-        }
+        
     }
 });
 }
@@ -259,34 +260,34 @@ function hider(){
         $('#item_qty').hide();
     }
     else if(!str.localeCompare("percent")){
-         document.getElementById("rupees").value = "0";
-        document.getElementById("item").value = "";
-        document.getElementById("qty").value = "";
-        $('#percent_disc').show();
-        $('#item_disc').hide();
-        $('#rupees_disc').hide();
-        $('#item_qty').hide();
-    }
-    else if(!str.localeCompare("item")){
-         document.getElementById("rupees").value = "0";
-        document.getElementById("percent").value = "0";
-        document.getElementById("qty").value = "";
-        $('#percent_disc').hide();
-        $('#item_disc').show();
-        $('#rupees_disc').hide();
-        $('#item_qty').show();
-    }
-    else{
-           document.getElementById("rupees").value = "0";
-        document.getElementById("percent").value = "0";
-        document.getElementById("item").value = "";
-        document.getElementById("qty").value = "";
+     document.getElementById("rupees").value = "0";
+     document.getElementById("item").value = "";
+     document.getElementById("qty").value = "";
+     $('#percent_disc').show();
+     $('#item_disc').hide();
+     $('#rupees_disc').hide();
+     $('#item_qty').hide();
+ }
+ else if(!str.localeCompare("item")){
+     document.getElementById("rupees").value = "0";
+     document.getElementById("percent").value = "0";
+     document.getElementById("qty").value = "";
+     $('#percent_disc').hide();
+     $('#item_disc').show();
+     $('#rupees_disc').hide();
+     $('#item_qty').show();
+ }
+ else{
+   document.getElementById("rupees").value = "0";
+   document.getElementById("percent").value = "0";
+   document.getElementById("item").value = "";
+   document.getElementById("qty").value = "";
 
-        $('#percent_disc').hide();
-        $('#item_disc').hide();
-        $('#rupees_disc').hide();
-        $('#item_qty').hide();
-    }
+   $('#percent_disc').hide();
+   $('#item_disc').hide();
+   $('#rupees_disc').hide();
+   $('#item_qty').hide();
+}
 }
 </script>
 

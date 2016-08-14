@@ -154,8 +154,9 @@ public function offers(){
 		$action = "Offers";
 		$offers = Offer::where('customer_code',Auth::user()->customer_code)->get();
 		$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
+		$items = Product::where('customer_code',Auth::user()->customer_code)->get();
 
-		return View::make('offers',compact('action','offers','name'));
+		return View::make('offers',compact('action','offers','name','items'));
 	}
 	else{
 		return Redirect::route('home');
@@ -280,6 +281,17 @@ public function delete_item($id){
 	}
 
 	
+}
+
+public function item_list(){
+	  $data=Input::all();
+	  $qty = Product::where('customer_code',Auth::user()->customer_code)->where('id',$data['item_id'])->first()->quantity;
+
+	  if($qty){
+	  	return $qty;
+	  }
+	  return 'error';
+
 }
 
 }
