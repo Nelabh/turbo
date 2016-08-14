@@ -26,11 +26,15 @@ Route::get('devices',array('as'=>'devices','uses'=>'DealerController@devices'));
 Route::get('offers',array('as'=>'offers','uses'=>'DealerController@offers'));
 Route::post('add_offer',array('as'=>'add_offer','uses'=>'DealerController@add_offer'));
 Route::post('item_list',array('as'=>'item_list','uses'=>'DealerController@item_list'));
+Route::post('add_item',array('as'=>'add_item','uses'=>'DealerController@add_item'));
 Route::post('save_settings',array('as'=>'save_settings','uses'=>'DealerController@save_settings'));
 Route::post('add_device',array('as'=>'add_device','uses'=>'DealerController@add_device'));
+Route::get('items',array('as'=>'items','uses'=>'DealerController@items'));
 Route::get('delete_device/{id}',array('as'=>'delete_device','uses'=>'DealerController@delete_device'));
 Route::get('delete_offer/{id}',array('as'=>'delete_offer','uses'=>'DealerController@delete_offer'));
 Route::get('delete_dealer/{id}',array('as'=>'delete_dealer','uses'=>'AdminController@delete_dealer'));
+Route::get('delete_item/{id}',array('as'=>'delete_item','uses'=>'DealerController@delete_item'));
+
 });
 
 

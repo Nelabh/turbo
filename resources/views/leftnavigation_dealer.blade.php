@@ -42,6 +42,16 @@
                 <a href="{{URL::route('offers')}}"><i class="fa fa-gift"></i> <span class="nav-label">Offers</span></a>
             </li>
             @endif
+                @if(Request::path() == 'items')
+            <li class = "active" >
+                <a href="{{URL::route('items')}}"><i class="fa fa-gift"></i> <span class="nav-label">Items</span></a>
+            </li>
+            @else
+            <li >
+                <a href="{{URL::route('items')}}"><i class="fa fa-gift"></i> <span class="nav-label">Items</span></a>
+            </li>
+            @endif
+            
              <li >
                 <a href="" data-toggle="modal" data-target="#check"  ><i class="fa fa-inr"></i> <span class="nav-label">Settings</span></a>
             </li>

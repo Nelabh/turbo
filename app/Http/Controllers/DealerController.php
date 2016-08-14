@@ -19,6 +19,7 @@ use DB;
 use App\Device;
 use Session;
 use App\Customer;
+use App\Product;
 use App\Transaction;
 class DealerController extends BaseController
 {
@@ -199,7 +200,7 @@ public function delete_offer($id){
 			return Redirect::route('offers')->with('success','Offer Successfully Deleted');
 		}
 		else{
-			return Redirect::route('ofers')->with('failure','An Error Occured While Deleting Offer!!! Please Try Again!!!');
+			return Redirect::route('offers')->with('failure','An Error Occured While Deleting Offer!!! Please Try Again!!!');
 		}
 	}
 	else{
@@ -222,4 +223,63 @@ public function save_settings(){
 	Session::forget('check');
 	return Redirect::route('dashboard')->with('success','Settings Successfully Saved');
 }
+
+public function items(){
+	if(Auth::user()->level <= 5){
+		$action = "Items";
+		$items = Product::where('customer_code',Auth::user()->customer_code)->get();
+		$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
+
+		return View::make('items',compact('action','items','name'));
+	}
+	else{
+		return Redirect::route('home');
+
+	}
+}
+
+public function add_item(){
+	if(Auth::user()->level <= 5){
+		$data = Input::all();
+		$rules=array(
+			'item' => 'required',
+			'quantity' => 'required'
+				);
+		$validator = Validator::make($data, $rules);
+		if($validator->fails()){
+
+			return Redirect::back()->withErrors($validator->errors())->withInput();
+		}
+		else {
+			if(Product::where('item',$data['item'])->
+				where('quantity',$data['quantity'])->first()){
+				return Redirect::route('items')->with('failure','Item Already Exists');
+		}
+		$item = new Product;
+		$item->item = $data['item'];
+		$item->customer_code = Auth::user()->customer_code;
+		$item->quantity = $data['quantity'];
+		$item->save();
+		return Redirect::route('items')->with('success','Item Successfully Added');
+	}
+
+}
+}
+public function delete_item($id){
+	if(Auth::user()->level <= 5 && (Auth::user()->customer_code == Product::where('id',$id)->first()->customer_code)){
+		$item = Product::where('id',$id)->first();
+		if($item->delete()){
+			return Redirect::route('items')->with('success','Item Successfully Deleted');
+		}
+		else{
+			return Redirect::route('items')->with('failure','An Error Occured While Deleting Item!!! Please Try Again!!!');
+		}
+	}
+	else{
+		return Redirect::route('items')->with('failure','Access Denied');
+	}
+
+	
+}
+
 }
