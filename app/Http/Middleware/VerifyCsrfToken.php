@@ -17,6 +17,7 @@ class VerifyCsrfToken extends BaseVerifier
         'register',
         'fills',
         'check',
-        'check2'
+        'check2',
+        'calc',
     ];
 }
