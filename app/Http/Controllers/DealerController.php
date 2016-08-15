@@ -202,7 +202,7 @@ public function add_offer(){
 		
 	 	else
 	 	{
-		$offer->discount_objects = $data['item_list'];
+		$offer->discount_objects = Product::where('id',$data['item_list'])->first()->item_name;
 		$offer->quantity = $data['quantity'];
 
 	 	}

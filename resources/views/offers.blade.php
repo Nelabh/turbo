@@ -47,9 +47,14 @@
                                 <thead>
                                     <tr>
                                         <th>S. No.</th>
-                                        <th>Discount Percent</th>
                                         <th>Discount Type</th>
+                                        <th>Discount object</th>
                                         <th>Discount Volume</th>
+                                        <th>Discount Percent</th>
+                                        <th>Discount On</th>
+
+
+
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -59,10 +64,19 @@
                                     @foreach($offers as $offer)
                                     <tr class="gradeX">
                                         <td>{{$i}}</td>
-                                        <td>{{$offer->discount_percent}}%
-                                        </td>
-                                        <td>{{$offer->refill_type}}</td>
+                                        <td>{{$offer->type}}</td>
+                                        @if($offer->type=="rupees")
+                                        <td>{{$offer->discount_objects}}&#8377;</td>
+                                        @elseif($offer->type =="item")
+                                        <td>{{$offer->discount_objects}}*{{$offer->quantity}}</td>
+                                        @else
+                                        <td></td>
+                                        @endif
                                         <td>{{$offer->discount_volume}}</td>
+                                        <td>{{$offer->discount_percent}}</td>
+
+                                        <td>{{$offer->refill_type}}</td>
+
                                         <td><a href = "{{URL::route('delete_offer',$offer->id)}}"class="btn btn-outline btn-danger" type="button">
                                             <i class="fa fa-trash-o"></i> <span class="bold">Delete</span>
                                         </a>
@@ -124,7 +138,7 @@
                             <option value = "" >Select Type</option>
                             <option value = "rupees">Rupees</option>
                             <option value = "percent">Percent</option>
-                            <option value = "item">Item</option>
+                            <option value = "item_list">Item</option>
                         </select>
                     </div>
                 </div>
@@ -154,7 +168,7 @@
 
                     <div class="col-sm-10">
                        <div class="col-sm-10"><select class="form-control m-b" onchange ="checkitem()"  required name="item_list" id = "item_list">
-                        <option selected value = "" >Select Item</option>
+                        <option value = "" >Select Item</option>
                        
                         @foreach($items as $item)
                         <option value = "{{$item->id}}">{{$item->item}}</option>
@@ -252,7 +266,7 @@ function hider(){
     var str = document.getElementById("type").value;
     if(!str.localeCompare("rupees")){
         document.getElementById("percent").value = "0";
-        document.getElementById("item").value = "";
+        document.getElementById("item_list").value = "";
         document.getElementById("qty").value = "";
         $('#percent_disc').hide();
         $('#item_disc').hide();
@@ -261,14 +275,15 @@ function hider(){
     }
     else if(!str.localeCompare("percent")){
      document.getElementById("rupees").value = "0";
-     document.getElementById("item").value = "";
+     document.getElementById("item_list").value = "";
      document.getElementById("qty").value = "";
      $('#percent_disc').show();
      $('#item_disc').hide();
      $('#rupees_disc').hide();
      $('#item_qty').hide();
  }
- else if(!str.localeCompare("item")){
+ else if(!str.localeCompare("item_list")){
+  console.log(qty);
      document.getElementById("rupees").value = "0";
      document.getElementById("percent").value = "0";
      document.getElementById("qty").value = "";
@@ -280,7 +295,7 @@ function hider(){
  else{
    document.getElementById("rupees").value = "0";
    document.getElementById("percent").value = "0";
-   document.getElementById("item").value = "";
+   document.getElementById("item_list").value = "";
    document.getElementById("qty").value = "";
 
    $('#percent_disc').hide();
