@@ -48,9 +48,8 @@
                                     <tr>
                                         <th>S. No.</th>
                                         <th>Discount Type</th>
-                                        <th>Discount object</th>
+                                        <th>Discounts</th>
                                         <th>Discount Volume</th>
-                                        <th>Discount Percent</th>
                                         <th>Discount On</th>
 
 
@@ -66,14 +65,13 @@
                                         <td>{{$i}}</td>
                                         <td>{{$offer->type}}</td>
                                         @if($offer->type=="rupees")
-                                        <td>{{$offer->discount_objects}}&#8377;</td>
-                                        @elseif($offer->type =="item")
-                                        <td>{{$offer->discount_objects}}*{{$offer->quantity}}</td>
+                                        <td>&#8377;{{$offer->discount_objects}}</td>
+                                        @elseif($offer->type =="item_list")
+                                        <td>{{$offer->quantity}}*{{$offer->discount_objects}}</td>
                                         @else
-                                        <td></td>
+                                        <td>{{$offer->discount_percent}} %</td>
                                         @endif
                                         <td>{{$offer->discount_volume}}</td>
-                                        <td>{{$offer->discount_percent}}</td>
 
                                         <td>{{$offer->refill_type}}</td>
 
@@ -111,7 +109,7 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title">Add New Offer</h4>
                 </div>
-                <form method="post" action = "{{URL::route('add_offer')}}" class="form-horizontal">
+                <form method="post" action = "{{URL::route('add_offer')}}" class="form-horizontal" novalidate>
                     {{csrf_field()}}
 
                     <div class="modal-body">

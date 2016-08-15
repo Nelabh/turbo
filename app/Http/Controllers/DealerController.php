@@ -190,7 +190,7 @@ public function add_offer(){
 		
 		if($data['type']=="rupees")
 		{
-		$offer->discount_objects = $data['rupees'];
+		$offer->discount_objects = $data['discount_rupees'];
 			$offer->quantity = 0;
 			
 		}
@@ -202,7 +202,7 @@ public function add_offer(){
 		
 	 	else
 	 	{
-		$offer->discount_objects = Product::where('id',$data['item_list'])->first()->item_name;
+		$offer->discount_objects = Product::where('id',$data['item_list'])->first()->item;
 		$offer->quantity = $data['quantity'];
 
 	 	}
