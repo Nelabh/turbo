@@ -192,7 +192,7 @@ public function add_offer(){
 		
 		if($data['type']=="rupees")
 		{
-		$offer->discount_objects = $data['discount_rupees'];
+			$offer->discount_objects = $data['discount_rupees'];
 			$offer->quantity = 0;
 			
 		}
@@ -202,12 +202,12 @@ public function add_offer(){
 			$offer->quantity = 0;
 		}
 		
-	 	else
-	 	{
-		$offer->discount_objects = Product::where('id',$data['item_list'])->first()->item;
-		$offer->quantity = $data['quantity'];
+		else
+		{
+			$offer->discount_objects = Product::where('id',$data['item_list'])->first()->item;
+			$offer->quantity = $data['quantity'];
 
-	 	}
+		}
 		$offer->save();
 		return Redirect::route('offers')->with('success','Offer Successfully Added');
 	}
@@ -266,7 +266,7 @@ public function add_item(){
 		$rules=array(
 			'item' => 'required',
 			'quantity' => 'required'
-				);
+			);
 		$validator = Validator::make($data, $rules);
 		if($validator->fails()){
 
@@ -305,52 +305,91 @@ public function delete_item($id){
 }
 
 public function item_list(){
-	  $data=Input::all();
-	  $qty = Product::where('customer_code',Auth::user()->customer_code)->where('id',$data['item_id'])->first()->quantity;
+	$data=Input::all();
+	$qty = Product::where('customer_code',Auth::user()->customer_code)->where('id',$data['item_id'])->first()->quantity;
 
-	  if($qty){
-	  	return $qty;
-	  }
-	  return 'error';
+	if($qty){
+		return $qty;
+	}
+	return 'error';
 }
-public function customers($id){
-	$action = "Customer";
-	$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
-	if($id){
-		$customer = Customer::where('customer_code',Auth::user()->customer_code)->where('id',$id)->first();
-		if($customer){
-			$transactions = Transaction::where('customer_code',Auth::user()->customer_code)->where('vehicle_number',$customer->vehicle_number)->get();
-			$arr = [$customer,$transactions];
+public function customers($id = null){
+	if(Auth::user()->level <= 5){
+		$action = "Customer";
+		$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
+		if($id){
+			$customer = Customer::where('customer_code',Auth::user()->customer_code)->where('id',$id)->first();
+			if($customer){
+				$transactions = Transaction::where('customer_code',Auth::user()->customer_code)->where('vehicle_number',$customer->vehicle_number)->get();
+				$arr = [$customer,$transactions];
 			//return response()->json($arr);
-			return View::make('customer',compact('transactions','customer','action','name'));
+				return View::make('customer',compact('transactions','customer','action','name'));
+			}
+			else{
+				return Redirect::route('dashboard')->with('failure','Access Denied');
+			}
 		}
 		else{
-			return Redirect::route('dashboard')->with('failure','Access Denied');
+			return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
 		}
 	}
 	else{
-		return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
-	}
-
-}
-public function customerprint($id){
-	$action = "Print";
-	$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
-	if($id){
-		$customer = Customer::where('customer_code',Auth::user()->customer_code)->where('id',$id)->first();
-		if($customer){
-			$transactions = Transaction::where('customer_code',Auth::user()->customer_code)->where('vehicle_number',$customer->vehicle_number)->get();
+		$action = "Customer";
+		$name = Auth::user()->customer_code;
+		if($id){
+			$customer = Customer::where('id',$id)->first();
+			if($customer){
+				$transactions = Transaction::where('vehicle_number',$customer->vehicle_number)->get();
 			//$arr = [$customer,$transactions];
 			//return response()->json($arr);
-			return View::make('customerprint',compact('transactions','customer','action','name'));
+				return View::make('customer',compact('transactions','customer','action','name'));
+			}
+			else{
+				return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
+			}
 		}
 		else{
-			return Redirect::route('dashboard')->with('failure','Access Denied');
+			return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
+		}
+
+	}
+
+}
+public function customerprint($id = null){
+	if(Auth::user()->level <= 5){
+		$action = "Print";
+		$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
+		if($id){
+			$customer = Customer::where('customer_code',Auth::user()->customer_code)->where('id',$id)->first();
+			if($customer){
+				$transactions = Transaction::where('customer_code',Auth::user()->customer_code)->where('vehicle_number',$customer->vehicle_number)->get();
+			//$arr = [$customer,$transactions];
+			//return response()->json($arr);
+				return View::make('customerprint',compact('transactions','customer','action','name'));
+			}
+			else{
+				return Redirect::route('dashboard')->with('failure','Access Denied');
+			}
+		}
+		else{
+			return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
 		}
 	}
 	else{
-		return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
+		$action = "Print";
+		if($id){
+			$customer = Customer::where('id',$id)->first();
+			if($customer){
+				$transactions = Transaction::where('vehicle_number',$customer->vehicle_number)->get();
+				return View::make('customerprint',compact('transactions','customer','action','name'));
+			}
+			else{
+				return Redirect::route('dashboard')->with('failure','Access Denied');
+			}
+		}
+		else{
+			return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
+		}
 	}
-
 }
 }

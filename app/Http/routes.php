@@ -36,7 +36,8 @@ Route::get('delete_dealer/{id}',array('as'=>'delete_dealer','uses'=>'AdminContro
 Route::get('delete_item/{id}',array('as'=>'delete_item','uses'=>'DealerController@delete_item'));
 Route::get('customers/{id?}',array('as'=>'customers','uses'=>'DealerController@customers'));
 Route::get('customerprint/{id?}',array('as'=>'customerprint','uses'=>'DealerController@customerprint'));
-
+Route::get('viewdealer/{id?}',array('as'=>'viewdealer','uses'=>'AdminController@viewdealer'));
+Route::get('dealerprint/{id?}',array('as'=>'dealerprint','uses'=>'AdminController@dealerprint'));
 });
 
 

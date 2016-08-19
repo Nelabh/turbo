@@ -154,7 +154,7 @@
                                         @if($dealer)
                                         @foreach($dealer as $d)
                                         <tr class="gradeX">
-                                            <td>{{$d->name}}</td>
+                                            <td><a href = "{{URL::route('viewdealer',$d->id)}}">{{$d->name}}</td>
                                             <td>{{$d->customer_code}}</td>
                                             <td>{{$d->petrol_price}}</td>
                                             <td class="center">{{$d->diesel_price}}</td>
