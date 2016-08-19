@@ -135,6 +135,127 @@ public function register(){
 
 
 
+/*public function fills(){
+
+	$data = Input::all();
+	$trans = new Transaction;
+	$trans->device_id = $data['device_id'];
+	$trans->vehicle_number = $data['vehicle_number'];
+	$trans->volume = $data['fill_volume'];
+
+
+
+	$customer = Customer::where('vehicle_number',$data['vehicle_number'])->first();
+	$customer->total_volume += $data['fill_volume'];
+	$customer->save();
+
+	if($data['petrol']=='1')
+		$trans->type = 'petrol';
+	
+	else if($data['petrol']=='0')
+		$trans->type = 'diesel';
+	else 
+		$trans->type = 'speed';
+	$f=-1;
+
+	$ref = mt_rand(100000,1000000);
+	while($f==-1)
+	{
+		if(Reference::where('reference_number',$ref)->first()){
+			$ref = mt_rand(100000,1000000);
+		}
+		else 
+			break;
+	}
+	$reference = new Reference;
+	$reference->reference_number = $ref;
+	$reference->flag =0;
+	$reference->customer_id = $customer->id;
+	$reference->save();
+	$r_list = array();
+	if(!$data['newuser_flag'])     // not new user
+	{
+
+		$device=Device::where('device_id',$data['device_id'])->first()->customer_code;
+		$trans->customer_code=$device;
+		$dealers = Dealer::where('customer_code',$trans->customer_code)->first();
+		if($trans->type == 'petrol')
+			$tp = $dealers->petrol_price;
+		else if($trans->type=='diesel')
+			$tp = $dealers->diesel_price;
+		else
+			$tp = $dealers->speed_price;
+		$trans->save();
+		$offer = Offer::where('customer_code',$device)->where('refill_type',$trans->type)->get();
+		$ref = Reference::where('customer_id',$customer->id)->where('flag',1)->get();
+		$count = count($ref);
+		$t =  array();
+		foreach($offer as $off )
+		{
+			if($off->discount_volume<=$customer->total_volume)
+			{
+				if($off->type=="percent")
+
+					$t[]=array("id"=>$off->id,"percent"=>$off->discount_percent,"type"=>$off->type);
+				
+				else
+					$t[]=array("id"=>$off->id,"percent"=>$off->discount_objects,"type"=>$off->type);
+			}
+		}
+
+		if($count)
+		{
+			$refc = Offer::where('customer_code',$data['customer_code'])->where('refill_type','reference')->first();
+			if($refc->type=="percent")
+				$r_list=array("id"=>$refc->id,"percent"=>$refc->discount_perc,"type"=>$refc->type,"qty"=>$count);
+			else
+				$r_list=array("id"=>$refc->id,"percent"=>$refc->discount_objects,"type"=>$refc->type,"qty"=>$count);
+
+		}
+		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'price'=>$tp,'list'=>$r_list);
+		return response()->json($f);
+	}
+	else 
+	{
+		$device=Device::where('device_id',$data['device_id'])->first()->customer_code;
+		$trans->customer_code=$device;
+		$dealers = Dealer::where('customer_code',$trans->customer_code)->first();
+		if($trans->type == 'petrol')
+			$tp = $dealers->petrol_price;
+		else if($trans->type=='diesel')
+			$tp = $dealers->diesel_price;
+		else
+			$tp = $dealers->speed_price;
+		$trans->save();
+		$offer = Offer::where('customer_code',$device)->where('refill_type',$trans->type)->get();
+		$ref = Reference::where('customer_id',$customer->id)->where('flag',1)->get();
+		$count = count($ref);
+		$t =  array();
+		foreach($offer as $off)
+		{
+			if($off->discount_volume<=$customer->total_volume)
+			{
+				if($off->type=="percent")
+					$t[]=array("id"=>$off->id,"percent"=>$off->discount_perc,"type"=>$off->type);
+				else
+					$t[]=array("id"=>$off->id,"percent"=>$off->discount_objects,"type"=>$off->type);
+			}
+		}
+		$refc = Offer::where('customer_code',$device)->where('refill_type','ft')->first();
+		if($refc)
+		{
+			if($refc->type=="percent")
+				$r_list=array("id"=>$refc->id,"percent"=>$refc->discount_perc,"type"=>$refc->type,"qty"=>0);
+			else
+				$r_list=array("id"=>$refc->id,"percent"=>$refc->discount_objects,"type"=>$refc->type,"qty"=>0);
+		}
+		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'price'=>$tp,'list'=>$r_list);
+		return response()->json($f);
+	}
+
+}*/
+
+
 public function fills(){
 
 	$data = Input::all();
@@ -163,25 +284,21 @@ public function fills(){
 	{
 		if(Reference::where('reference_number',$ref)->first()){
 			$ref = mt_rand(100000,1000000);
-			}
+		}
 		else 
 			break;
 	}
-
-
-		$reference = new Reference;
-		$reference->reference_number = $ref;
-		$reference->flag =0;
-		$reference->customer_id = $customer->id;
-		$reference->save();
-
-
-	if(!$data['reference_flag'])
+	$reference = new Reference;
+	$reference->reference_number = $ref;
+	$reference->flag =0;
+	$reference->customer_id = $customer->id;
+	$reference->save();
+	$r_list = array();
+	if(!$data['newuser_flag'])     // not new user
 	{
 
 		$device=Device::where('device_id',$data['device_id'])->first()->customer_code;
 		$trans->customer_code=$device;
-
 		$dealers = Dealer::where('customer_code',$trans->customer_code)->first();
 		if($trans->type == 'petrol')
 			$tp = $dealers->petrol_price;
@@ -189,55 +306,88 @@ public function fills(){
 			$tp = $dealers->diesel_price;
 		else
 			$tp = $dealers->speed_price;
-
 		$trans->save();
-		
 		$offer = Offer::where('customer_code',$device)->where('refill_type',$trans->type)->get();
+		$ref = Reference::where('customer_id',$customer->id)->where('flag',1)->get();
+		$count = count($ref);
 		$t =  array();
-		foreach($offer as $off )
+		foreach($offer as $off ) 
 		{
 			if($off->discount_volume<=$customer->total_volume)
 			{
+				if(!strcmp($off->type,"percent"))
 
-				$t[]=array("id"=>$off->id,"percent"=>$off->discount_percent);
-
+					$t[]=array("id"=>$off->id,"percent"=>$off->discount_percent."%","message"=>"normal");
+				else if(!strcmp($off->type,"rupees"))
+					$t[]=array("id"=>$off->id,"percent"=>"&#8377;".$off->discount_objects,"message"=>"normal");
+				else
+					$t[]=array("id"=>$off->id,"percent"=>$off->quantity."*".$off->discount_objects,"message"=>"normal");
 			}
 		}
-		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'price'=>$tp,'reference_number'=>$ref);
+
+		if($count)
+		{
+			$refc = Offer::where('customer_code',$data['customer_code'])->where('refill_type','reference')->first();
+			if(!strcmp($refc->type,"percent"))
+
+				$t[]=array("id"=>$refc->id,"percent"=>$count."*".$refc->discount_perc."%","message"=>"reference");
+			else if(!strcmp($off->type,"rupees"))
+				$t[]=array("id"=>$refc->id,"percent"=>$count."*"."Rs".$refc->discount_objects,"message"=>"reference");
+			else
+				$t[]=array("id"=>$refc->id,"percent"=>$refc->quantity."*".$refc->discount_objects,"message"=>"reference");
+
+		}
+		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'price'=>$tp);
 		return response()->json($f);
-
-
-
 	}
 	else 
 	{
 		$device=Device::where('device_id',$data['device_id'])->first()->customer_code;
 		$trans->customer_code=$device;
+		$dealers = Dealer::where('customer_code',$trans->customer_code)->first();
+		if(!strcmp($trans->type , 'petrol'))
+			$tp = $dealers->petrol_price;
+		else if(!strcmp($trans->type,'diesel'))
+			$tp = $dealers->diesel_price;
+		else
+			$tp = $dealers->speed_price;
 		$trans->save();
-
-		$offer = Offer::where('customer_code',$device)->where('refill_type','ft')->get();
+		$offer = Offer::where('customer_code',$device)->where('refill_type',$trans->type)->get();
+		$ref = Reference::where('customer_id',$customer->id)->where('flag',1)->get();
+		$count = count($ref);
 		$t =  array();
 		foreach($offer as $off )
 		{
 			if($off->discount_volume<=$customer->total_volume)
 			{
-				$t[]=array("id"=>$off->id,"percent"=>$off->discount_percent);
+				if(!strcmp($off->type,"percent"))
 
+					$t[]=array("id"=>$off->id,"percent"=>$off->discount_percent." %","message"=>"normal");
+				else if(!strcmp($off->type,"rupees"))
+					$t[]=array("id"=>$off->id,"percent"=>"Rs".$off->discount_objects,"message"=>"normal");
+				else
+					$t[]=array("id"=>$off->id,"percent"=>$off->quantity."*".$off->discount_objects,"message"=>"normal");
 			}
 		}
-		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'reference_number'=>$ref);
+
+		$refc = Offer::where('customer_code',$device)->where('refill_type','ft')->first();
+		if($refc)
+		{
+			if(!strcmp($refc->type,"percent"))
+
+				$t[]=array("id"=>$refc->id,"percent"=>$refc->discount_perc."%","message"=>"ft");
+			else if(!strcmp($off->type,"rupees"))
+				$t[]=array("id"=>$refc->id,"percent"=>"Rs".$refc->discount_objects,"message"=>"ft");
+			else
+				$t[]=array("id"=>$refc->id,"percent"=>$refc->quantity."*".$refc->discount_objects,"message"=>"ft");
+		}
+		$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'price'=>$tp);
 		return response()->json($f);
-
-
-
-
-
-
-
-
 	}
 
 }
+
+
 public function calc(){
 	$data = Input::all();
 	$device=Device::where('device_id',$data['device_id'])->first()->customer_code;
@@ -263,9 +413,29 @@ public function calc(){
 	if($data['flag_discount'])
 	{
 		$discount=Offer::where('id',$data['discount_id'])->first();
-		$ret = $calc;
+		if(!strcmp($discount->type,"percent"))
+		{
 		$calc=$calc-($discount->discount_percent/100)*$calc;
+			$trans->discount=$calc;
+
+		}
+		else if(!strcmp($discount->type,"rupees"))
+		{
+			$calc = $calc- $discount_objects;
+			$trans->discount=$calc;
+
+
+		}
+		else 
+			$trans->discount=$discount_objects."*".$count;
+
+
+
+		
 	}
+
+	$trans->discount_type=$discount->type;
+
 
 	$trans->total_cost=$calc;
 	$trans->save();
@@ -274,8 +444,8 @@ public function calc(){
 		return $dealer->petrol_price;
 	else if($data['petrol']==0)
 		return $dealer->diesel_price;
-		else 
-			return $dealer->speed_price;
+	else 
+		return $dealer->speed_price;
 
 
 }
