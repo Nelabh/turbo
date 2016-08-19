@@ -3,7 +3,7 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element"> <span>
-                    <img alt="image" src="img/bpcl.png"/>
+                    <img alt="image" src="{{URL::asset('img/bpcl.png')}}"/>
                 </span>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Welcome {{$name}}</strong>

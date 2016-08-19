@@ -84,6 +84,8 @@ class DealerController extends BaseController
 
 		foreach ($transaction as $transac) {
 			$transac->customer = Customer::where('vehicle_number',$transac->vehicle_number)->first()->name;
+			$transac->customer_id = Customer::where('vehicle_number',$transac->vehicle_number)->first()->id;
+
 		}
 
 		return View::make('dashboard_dealer', compact('action','name','dealer','counter','cust','total' ,'income','transaction','petrol_graph','diesel_graph'));
@@ -310,7 +312,45 @@ public function item_list(){
 	  	return $qty;
 	  }
 	  return 'error';
+}
+public function customers($id){
+	$action = "Customer";
+	$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
+	if($id){
+		$customer = Customer::where('customer_code',Auth::user()->customer_code)->where('id',$id)->first();
+		if($customer){
+			$transactions = Transaction::where('customer_code',Auth::user()->customer_code)->where('vehicle_number',$customer->vehicle_number)->get();
+			$arr = [$customer,$transactions];
+			//return response()->json($arr);
+			return View::make('customer',compact('transactions','customer','action','name'));
+		}
+		else{
+			return Redirect::route('dashboard')->with('failure','Access Denied');
+		}
+	}
+	else{
+		return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
+	}
 
 }
+public function customerprint($id){
+	$action = "Print";
+	$name = Dealer::where('customer_code',Auth::user()->customer_code)->first()->name;
+	if($id){
+		$customer = Customer::where('customer_code',Auth::user()->customer_code)->where('id',$id)->first();
+		if($customer){
+			$transactions = Transaction::where('customer_code',Auth::user()->customer_code)->where('vehicle_number',$customer->vehicle_number)->get();
+			//$arr = [$customer,$transactions];
+			//return response()->json($arr);
+			return View::make('customerprint',compact('transactions','customer','action','name'));
+		}
+		else{
+			return Redirect::route('dashboard')->with('failure','Access Denied');
+		}
+	}
+	else{
+		return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
+	}
 
+}
 }
