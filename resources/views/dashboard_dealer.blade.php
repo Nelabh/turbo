@@ -171,7 +171,7 @@
                                         @if($transaction)
                                         @foreach($transaction as $t)
                                         <tr class="gradeX">
-                                            <td>{{$t->customer}}</td>
+                                           <td> <a href = "{{URL::route('customers',$t->customer_id)}}">{{$t->customer}}</a></td>
                                             <td>{{$t->vehicle_number}}</td>
                                             <td>{{$t->type}}</td>
                                             <td class="center">{{$t->volume}}</td>

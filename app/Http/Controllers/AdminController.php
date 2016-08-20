@@ -141,5 +141,53 @@ class AdminController extends BaseController{
 	public function view_users(){
 		return view::make('view_users');
 	}
+	public function viewdealer($id = null){
+		if(Auth::user()->level > 5){
+			$action = "Dealers";
+			if($id){
+				$customer = Dealer::where('id',$id)->first();
+				if($customer){
+					$transactions = Transaction::where('customer_code',$customer->customer_code)->get();
+					foreach ($transactions as $trans) {
+						$trans->cust_id = Customer::where('vehicle_number',$trans->vehicle_number)->first()->id;
+					}
+
+					return View::make('viewdealer',compact('transactions','customer','action'));
+				}
+				else{
+					return Redirect::route('dashboard')->with('failure','Invalid Dealer!!!');
+				}
+			}
+			else{
+				return Redirect::route('dashboard')->with('failure','Invalid Dealer!!!');
+			}
+		}
+		else{
+			return Redirect::route('dashboard')->with('failure','Access Denied!!!');
+		}
+
+	}
+
+	public function dealerprint($id = null){
+		if(Auth::user()->level > 5){
+		$action = "Print";
+			if($id){
+				$customer = Dealer::where('id',$id)->first();
+				if($customer){
+					$transactions = Transaction::where('customer_code',$customer->customer_code)->get();
+					return View::make('dealerprint',compact('transactions','customer','action','name'));
+				}
+				else{
+					return Redirect::route('dashboard')->with('failure','Access Denied');
+				}
+			}
+			else{
+				return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
+			}
+		}
+		else{
+			return Redirect::route('dashboard')->with('failure','Access Denied!!!');
+		}
+	}
 	
 }
