@@ -284,6 +284,7 @@ public function fills(){
 	$f=-1;
 
 	$ref = mt_rand(100000,1000000);
+	$number=$ref;
 	while($f==-1)
 	{
 		if(Reference::where('reference_number',$ref)->first()){
@@ -296,7 +297,7 @@ public function fills(){
 	$reference->reference_number = $ref;
 	$reference->flag =0;
 	$reference->customer_id = $customer->id;
-	$reference->offer_id=Offer::where('customer_code',$device->customer_code)->where('refill_type','reference')->first()->id;
+	$reference->offer_id=Offer::where('customer_code',$device)->where('refill_type','reference')->first()->id;
 	$reference->save();
 	$r_list = array();
 	if(!$data['newuser_flag'])     // not new user
@@ -321,11 +322,11 @@ public function fills(){
 			{
 				if(!strcmp($off->type,"percent"))
 
-					$t[]=array("id"=>$off->id,"percent"=>$off->discount_percent."%","message"=>"normal");
+					$t[]=array("id"=>$off->id,"percent"=>$off->discount_percent,"message"=>"normal","type"=>"percent");
 				else if(!strcmp($off->type,"rupees"))
-					$t[]=array("id"=>$off->id,"percent"=>"&#8377;".$off->discount_objects,"message"=>"normal");
+					$t[]=array("id"=>$off->id,"percent"=>$off->discount_objects,"message"=>"normal","type"=>"rupees");
 				else
-					$t[]=array("id"=>$off->id,"percent"=>$off->quantity."*".$off->discount_objects,"message"=>"normal");
+					$t[]=array("id"=>$off->id,"percent"=>$off->quantity."*".$off->discount_objects,"message"=>"normal","type"=>"object");
 			}
 		}
 
@@ -338,15 +339,15 @@ public function fills(){
 			/*$refc = Offer::where('customer_code',$data['customer_code'])->where('refill_type','reference')->first();	
 			*/
 			if(!strcmp($ref->offer->type,"percent"))
-				$t[]=array("id"=>$ref->id,"percent"=>$count."*".$ref->offer->discount_perc."%","message"=>"reference");
+				$t[]=array("id"=>$ref->id,"percent"=>$count."*".$ref->offer->discount_perc,"message"=>"reference","type"=>"percent");
 			else if(!strcmp($off->type,"rupees"))
-				$t[]=array("id"=>$ref->id,"percent"=>$count."*"."Rs".$ref->offer->discount_objects,"message"=>"reference");
+				$t[]=array("id"=>$ref->id,"percent"=>$count."*".$ref->offer->discount_objects,"message"=>"reference","type"=>"rupees");
 			else
-				$t[]=array("id"=>$ref->id,"percent"=>$refc->quantity."*".$ref->offer->discount_objects,"message"=>"reference");
+				$t[]=array("id"=>$ref->id,"percent"=>$refc->quantity."*".$ref->offer->discount_objects,"message"=>"reference","type"=>"ojbect");
 		}
 
 	}
-	$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'price'=>$tp);
+	$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'price'=>$tp,'reference_number'=>$number);
 	return response()->json($f);
 }
 else 
@@ -371,11 +372,11 @@ else
 		{
 			if(!strcmp($off->type,"percent"))
 
-				$t[]=array("id"=>$off->id,"percent"=>$off->discount_percent." %","message"=>"normal");
+				$t[]=array("id"=>$off->id,"percent"=>$off->discount_percent,"message"=>"normal","type"=>"percent");
 			else if(!strcmp($off->type,"rupees"))
-				$t[]=array("id"=>$off->id,"percent"=>"Rs".$off->discount_objects,"message"=>"normal");
+				$t[]=array("id"=>$off->id,"percent"=>$off->discount_objects,"message"=>"normal","type"=>"rupees");
 			else
-				$t[]=array("id"=>$off->id,"percent"=>$off->quantity."*".$off->discount_objects,"message"=>"normal");
+				$t[]=array("id"=>$off->id,"percent"=>$off->quantity."*".$off->discount_objects,"message"=>"normal","type"=>"object");
 		}
 	}
 
@@ -384,13 +385,13 @@ else
 	{
 		if(!strcmp($refc->type,"percent"))
 
-			$t[]=array("id"=>$refc->id,"percent"=>$refc->discount_perc."%","message"=>"ft");
+			$t[]=array("id"=>$refc->id,"percent"=>$refc->discount_perc,"message"=>"ft","type"=>"percent");
 		else if(!strcmp($off->type,"rupees"))
-			$t[]=array("id"=>$refc->id,"percent"=>"Rs".$refc->discount_objects,"message"=>"ft");
+			$t[]=array("id"=>$refc->id,"percent"=>$refc->discount_objects,"message"=>"ft","type"=>"rupees");
 		else
-			$t[]=array("id"=>$refc->id,"percent"=>$refc->quantity."*".$refc->discount_objects,"message"=>"ft");
+			$t[]=array("id"=>$refc->id,"percent"=>$refc->quantity."*".$refc->discount_objects,"message"=>"ft","type"=>"object");
 	}
-	$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'price'=>$tp);
+	$f = array("total_volume"=>$customer->total_volume,"discounts"=>$t,"transaction_id"=>$trans->id,'price'=>$tp,'reference_number'=>$number);
 	return response()->json($f);
 }
 
@@ -425,12 +426,13 @@ public function calc(){
 
 	if($data['flag_discount'])
 	{
-		if(strcmp($data['message'],'reference')){
+		if(!strcmp($data['message'],'reference')){
 			$reference = Reference::where('id',$data['discount_id'])->first();
 			$offer  = Offer::where('id',$reference->offer_id)->first();
 			$reference->flag = 2;
 			$reference->save();
 			$trans->discount_type=$data['message'];
+			dd($offer);
 			$customer->total_volume-=$offer->discount_volume;
 
 
@@ -442,11 +444,11 @@ public function calc(){
 			}
 			else if(!strcmp($offer->type,"rupees"))
 			{
-				$calc = $calc- $discount_objects;
+				$calc = $calc- $offer->discount_objects;
 				$trans->discount=$calc;
 			}
 			else 
-				$trans->discount=$discount_objects."*".$count;
+				$trans->discount=$offer->discount_objects."*".$count;
 
 			$trans->discount_type=$offer->type;
 			$trans->total_cost=$calc;
@@ -474,14 +476,14 @@ public function calc(){
 		}
 		else if(!strcmp($discount->type,"rupees"))
 		{
-			$calc = $calc- $discount_objects;
+			$calc = $calc- $discount->discount_objects;
 			$trans->discount=$calc;
 
 
 
 		}
 		else 
-			$trans->discount=$discount_objects."*".$count;
+			$trans->discount=$discount->discount_objects."*".$count;
 		
 	}
 
