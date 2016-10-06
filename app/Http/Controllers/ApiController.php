@@ -404,9 +404,6 @@ public function calc(){
 	$dealer = Dealer::where('customer_code',$device)->first();
 	$trans = Transaction::where('id',$data['transaction_id'])->first();
 	$customer = Customer::where('vehicle_number',$data['vehicle_number'])->first();
-
-
-
 	if($data['petrol']==1)
 	{
 
@@ -422,8 +419,6 @@ public function calc(){
 		$calc = $data['volume']*$dealer->speed_price;
 		$trans->rate = $dealer->speed_price;	
 	}
-
-
 	if($data['flag_discount'] && $data['flag_discount'] != -2)
 	{
 		if(!strcmp($data['message'],'reference')){
@@ -432,7 +427,7 @@ public function calc(){
 			$reference->flag = 2;
 			$reference->save();
 			$trans->discount_type=$data['message'];
-			dd($offer);
+			//dd($offer);
 			$customer->total_volume-=$offer->discount_volume;
 
 
@@ -448,7 +443,7 @@ public function calc(){
 				$trans->discount=$calc;
 			}
 			else 
-				$trans->discount=$offer->discount_objects."*".$count;
+				$trans->discount=$offer->discount_objects."*".$offer->quantity;
 
 			$trans->discount_type=$offer->type;
 			$trans->total_cost=$calc;
@@ -483,7 +478,7 @@ public function calc(){
 
 		}
 		else 
-			$trans->discount=$discount->discount_objects."*".$count;
+			$trans->discount=$discount->discount_objects."*".$discount->quantity;
 		
 	}
 
