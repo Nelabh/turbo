@@ -10,9 +10,11 @@
 <body>
 
     <div id="wrapper">
-
+        @if(Auth::user()->level > 5)
+        @include('leftnavigation_admin')
+        @else
         @include('leftnavigation_dealer')
-
+        @endif
         <div id="page-wrapper" class="gray-bg">
             @include('topnavigation')
 
