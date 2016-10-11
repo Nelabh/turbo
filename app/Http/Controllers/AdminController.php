@@ -147,12 +147,15 @@ class AdminController extends BaseController{
 			if($id){
 				$customer = Dealer::where('id',$id)->first();
 				if($customer){
-					$transactions = Transaction::where('customer_code',$customer->customer_code)->get();
+					$transactions = Transaction::where('customer_code',$customer->customer_code)->groupBy('vehicle_number')->get();
+					//dd($transactions);
+					$custs = [];
 					foreach ($transactions as $trans) {
-						$trans->cust_id = Customer::where('vehicle_number',$trans->vehicle_number)->first()->id;
+						//$trans->cust_id = Customer::where('vehicle_number',$trans->vehicle_number)->first()->id;
+						$custs[] = Customer::where('vehicle_number',$trans->vehicle_number)->first();
 					}
-
-					return View::make('viewdealer',compact('transactions','customer','action'));
+					//dd($custs);
+					return View::make('viewdealer',compact('customer','custs','action'));
 				}
 				else{
 					return Redirect::route('dashboard')->with('failure','Invalid Dealer!!!');
@@ -174,8 +177,13 @@ class AdminController extends BaseController{
 			if($id){
 				$customer = Dealer::where('id',$id)->first();
 				if($customer){
-					$transactions = Transaction::where('customer_code',$customer->customer_code)->get();
-					return View::make('dealerprint',compact('transactions','customer','action','name'));
+					$transactions = Transaction::where('customer_code',$customer->customer_code)->groupBy('vehicle_number')->get();
+					$custs = [];
+					foreach ($transactions as $trans) {
+						$custs[] = Customer::where('vehicle_number',$trans->vehicle_number)->first();
+					}
+			
+					return View::make('dealerprint',compact('custs','customer','action','name'));
 				}
 				else{
 					return Redirect::route('dashboard')->with('failure','Access Denied');

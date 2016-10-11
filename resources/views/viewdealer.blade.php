@@ -21,88 +21,94 @@
                     <h2>Dealer</h2>
                     
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-2">
                     <div class="title-action">
-                     <a href="{{URL::route('dealerprint',$customer->id)}}" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print Details </a>
-                 </div>
-             </div>
-         </div>
-         <div class="row">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content animated fadeInRight">
-                    <div class="ibox-content p-xl">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h5>{{$customer->name}}</h5>
-                                <address>
-                                    <strong>{{$customer->email}}</strong><br>
+                       <a href="{{URL::route('dealerprint',$customer->id)}}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i> Download CSV </a>
+                   </div>
+               </div>
+               <div class="col-lg-2">
+                <div class="title-action">
+                   <a href="{{URL::route('dealerprint',$customer->id)}}" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print Details </a>
+               </div>
+           </div>
 
-                                 <abbr title="Phone">Contact:</abbr>  {{$customer->contact}}
-                                </address>
-                            </div>
+       </div>
+       <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox-content p-xl">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5>{{$customer->name}}</h5>
+                            <address>
+                                <strong>{{$customer->email}}</strong><br>
+
+                                <abbr title="Phone">Contact:</abbr>  {{$customer->contact}}
+                            </address>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="ibox">
-                                    <div class="ibox-title">
-                                        <h5>Transactions</h5>
-                                    </div>
-                                    <div class="ibox-content">
-                                        <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                                        placeholder="Search in table">
-
-                                        <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
-                                            <thead>
-                                                <tr>
-
-                                                    <th>Vehicle Number</th>
-                                                    <th >Type</th>
-                                                    <th >Volume filled</th>
-                                                    <th >Cost</th>
-                                                    <th>Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if($transactions)
-                                                @foreach($transactions as $t)
-                                                <tr class="gradeX">
-
-                                                    <td><a href = "{{URL::route('customers',$t->cust_id)}}">{{$t->vehicle_number}}</td>
-                                                    <td>{{$t->type}}</td>
-                                                    <td class="center">{{$t->volume}}</td>
-                                                    <td class="center">{{$t->total_cost}}</td>
-                                                    <td class="center">{{$t->created_at}}</td>
-
-
-                                                </tr>
-                                                @endforeach
-                                                @else
-                                                <tr class="gradeX">
-                                                    <td colspan="6"><center>NO TRANSACTIONS DONE YET</center></td>
-                                                </tr>
-                                                @endif
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="6">
-                                                        <ul class="pagination pull-right"></ul>
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ibox">
+                                <div class="ibox-title">
+                                    <h5>Customers</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                    placeholder="Search in table">
+
+                                    <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                                        <thead>
+                                            <tr>
+
+                                                <th>Vehicle Number</th>
+                                                <th >Name</th>
+                                                <th >E-mail</th>
+                                                <th >Contact</th>
+                                                <th>Volume Filled</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if($custs)
+                                            @foreach($custs as $t)
+                                            <tr class="gradeX">
+
+                                                <td><a href = "{{URL::route('customers',$t->id)}}">{{$t->vehicle_number}}</a></td>
+                                                <td>{{$t->name}}</td>
+                                                <td class="center">{{$t->email}}</td>
+                                                <td class="center">{{$t->contact}}</td>
+                                                <td class="center">{{$t->total_volume}}</td>
+
+
+                                            </tr>
+                                            @endforeach
+                                            @else
+                                            <tr class="gradeX">
+                                                <td colspan="6"><center>NO CUSTOMERS ADDED YET</center></td>
+                                            </tr>
+                                            @endif
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <ul class="pagination pull-right"></ul>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
-        @include('footer')
     </div>
+    @include('footer')
+</div>
 </div>
 
 @include('js')

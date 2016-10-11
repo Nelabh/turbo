@@ -386,7 +386,7 @@ else
 		if(!strcmp($refc->type,"percent"))
 
 			$t[]=array("id"=>$refc->id,"percent"=>$refc->discount_perc,"message"=>"ft","type"=>"percent");
-		else if(!strcmp($off->type,"rupees"))
+		else if(!strcmp($refc->type,"rupees"))
 			$t[]=array("id"=>$refc->id,"percent"=>$refc->discount_objects,"message"=>"ft","type"=>"rupees");
 		else
 			$t[]=array("id"=>$refc->id,"percent"=>$refc->quantity."*".$refc->discount_objects,"message"=>"ft","type"=>"object");
@@ -402,6 +402,7 @@ public function calc(){
 	$data = Input::all();
 	$device=Device::where('device_id',$data['device_id'])->first()->customer_code;
 	$dealer = Dealer::where('customer_code',$device)->first();
+	dd($dealer);
 	$trans = Transaction::where('id',$data['transaction_id'])->first();
 	$customer = Customer::where('vehicle_number',$data['vehicle_number'])->first();
 	if($data['petrol']==1)
@@ -419,7 +420,7 @@ public function calc(){
 		$calc = $data['volume']*$dealer->speed_price;
 		$trans->rate = $dealer->speed_price;	
 	}
-	if($data['flag_discount'] && $data['flag_discount'] != -2)
+	if($data['flag_discount']!=0)
 	{
 		if(!strcmp($data['message'],'reference')){
 			$reference = Reference::where('id',$data['discount_id'])->first();
@@ -458,31 +459,27 @@ public function calc(){
 				return $dealer->speed_price;
 
 		}
+
 		$discount=Offer::where('id',$data['discount_id'])->first();
-		$trans->discount_type=$data['message'];
-		$customer->total_volume-=$discount->discount_volume;
-
-
-		if(!strcmp($discount->type,"percent"))
-		{
-			$calc=$calc-($discount->discount_percent/100)*$calc;
-			$trans->discount=$calc;
-
+		if(count($discount)){
+			$trans->discount_type=$data['message'];
+			$customer->total_volume-=$discount->discount_volume;
+			if(!strcmp($discount->type,"percent"))
+			{
+				$calc=$calc-($discount->discount_percent/100)*$calc;
+				$trans->discount=$calc;
+			}
+			else if(!strcmp($discount->type,"rupees"))
+			{
+				$calc = $calc- $discount->discount_objects;
+				$trans->discount=$calc;
+			}
+			else 
+				$trans->discount=$discount->discount_objects."*".$discount->quantity;
 		}
-		else if(!strcmp($discount->type,"rupees"))
-		{
-			$calc = $calc- $discount->discount_objects;
-			$trans->discount=$calc;
-
-
-
-		}
-		else 
-			$trans->discount=$discount->discount_objects."*".$discount->quantity;
-		
+		$trans->discount_type=$discount->type;
 	}
 
-	$trans->discount_type=$discount->type;
 	$trans->total_cost=$calc;
 	$trans->save();
 	$customer->save();

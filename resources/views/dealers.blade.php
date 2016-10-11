@@ -58,7 +58,7 @@
                                     @if(count($dealers))
                                     @foreach($dealers as $deal)
                                     <tr class="gradeX">
-                                        <td>{{$deal->customer_code}}</td>
+                                        <td><a href = "{{URL::route('viewdealer',$deal->id)}}">{{$deal->customer_code}}</a></td>
                                         <td>{{$deal->pump_name}}
                                         </td>
                                         <td>{{$deal->name}}</td>
