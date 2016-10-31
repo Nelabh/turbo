@@ -135,7 +135,7 @@ class AdminController extends BaseController{
 			}
 		}
 		else{
-			return Redirect::route('devices')->with('failure','Access Denied');
+			return Redirect::route('dealers')->with('failure','Access Denied');
 		}
 	}
 	public function view_users(){
@@ -173,7 +173,7 @@ class AdminController extends BaseController{
 
 	public function dealerprint($id = null){
 		if(Auth::user()->level > 5){
-		$action = "Print";
+			$action = "Print";
 			if($id){
 				$customer = Dealer::where('id',$id)->first();
 				if($customer){
@@ -182,7 +182,6 @@ class AdminController extends BaseController{
 					foreach ($transactions as $trans) {
 						$custs[] = Customer::where('vehicle_number',$trans->vehicle_number)->first();
 					}
-			
 					return View::make('dealerprint',compact('custs','customer','action','name'));
 				}
 				else{
@@ -190,12 +189,68 @@ class AdminController extends BaseController{
 				}
 			}
 			else{
-				return Redirect::route('dashboard')->with('failure','Invalid Customer!!!');
+				return Redirect::route('dashboard')->with('failure','Invalid Dealer!!!');
 			}
 		}
 		else{
 			return Redirect::route('dashboard')->with('failure','Access Denied!!!');
 		}
 	}
-	
+	public function dealerprintcsv($id = null){
+		if(Auth::user()->level > 5){
+			$action = "Download Csv";
+			if($id){
+				$customer = Dealer::where('id',$id)->first();
+				//dd($customer);
+				if($customer){
+					$transactions = Transaction::where('customer_code',$customer->customer_code)->groupBy('vehicle_number')->get();
+					$custs = [];
+					$custs[] = array($customer->name,$customer->customer_code,$customer->pump_name);
+					$custs[] = array("---------","---------","-----------","-----------","-------------");
+					$custs[] = array("Vehicle Number","Name","Email","Contact","Total Volume");
+					foreach ($transactions as $trans) {
+						$cust = Customer::where('vehicle_number',$trans->vehicle_number)->first();
+						$custs[] = ['vehicle_number'=>$cust->vehicle_number,
+						 'name'=>$cust->name,
+						 'email'=>$cust->email,
+						 'contact'=>$cust->contact,
+						 'total_volume'=>$cust->total_volume
+						  ];
+					}
+					//dd($custs);
+
+					/*
+					*******************
+					CSV FORMATTING CODE
+					*******************	
+					*/
+					$file = fopen('customers.csv', 'w');
+					foreach ($custs as $row) {
+						fputcsv($file, $row);
+					}
+					fclose($file);
+
+
+					/*
+					***********************
+					CSV FORMATTING CODE END
+					***********************
+					*/
+					
+					return response()->download('customers.csv');
+					//return View::make('dealerprint',compact('custs','customer','action','name'));
+				}
+				else{
+					return Redirect::route('dashboard')->with('failure','Access Denied');
+				}
+			}
+			else{
+				return Redirect::route('dashboard')->with('failure','Invalid Dealer!!!');
+			}
+		}
+		else{
+			return Redirect::route('dashboard')->with('failure','Access Denied!!!');
+		}
+	}
+
 }

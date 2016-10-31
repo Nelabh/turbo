@@ -38,6 +38,8 @@ Route::get('customers/{id?}',array('as'=>'customers','uses'=>'DealerController@c
 Route::get('customerprint/{id?}',array('as'=>'customerprint','uses'=>'DealerController@customerprint'));
 Route::get('viewdealer/{id?}',array('as'=>'viewdealer','uses'=>'AdminController@viewdealer'));
 Route::get('dealerprint/{id?}',array('as'=>'dealerprint','uses'=>'AdminController@dealerprint'));
+Route::get('dealerprintcsv/{id?}',array('as'=>'dealerprintcsv','uses'=>'AdminController@dealerprintcsv'));
+
 });
 
 

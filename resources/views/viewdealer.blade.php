@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="title-action">
-                       <a href="{{URL::route('dealerprint',$customer->id)}}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i> Download CSV </a>
+                       <a href="{{URL::route('dealerprintcsv',$customer->id)}}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i> Download CSV </a>
                    </div>
                </div>
                <div class="col-lg-2">
@@ -121,74 +121,6 @@ $(window).load(function(){
 </script>
 @endif
 @endif
-<script type="text/javascript">
-
-document.getElementById('diesel').addEventListener('keydown', function(e)
-{
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-             // Allow: Ctrl+A
-             (e.keyCode == 65 && e.ctrlKey === true) ||
-             // Allow: Ctrl+C
-             (e.keyCode == 67 && e.ctrlKey === true) ||
-             // Allow: Ctrl+X
-             (e.keyCode == 88 && e.ctrlKey === true) ||
-             // Allow: home, end, left, right
-             (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 // let it happen, don't do anything
-             return;
-         }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-
-document.getElementById('speed').addEventListener('keydown', function(e)
-{
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-             // Allow: Ctrl+A
-             (e.keyCode == 65 && e.ctrlKey === true) ||
-             // Allow: Ctrl+C
-             (e.keyCode == 67 && e.ctrlKey === true) ||
-             // Allow: Ctrl+X
-             (e.keyCode == 88 && e.ctrlKey === true) ||
-             // Allow: home, end, left, right
-             (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 // let it happen, don't do anything
-             return;
-         }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-
-
-document.getElementById('petrol').addEventListener('keydown', function(e)
-{
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-             // Allow: Ctrl+A
-             (e.keyCode == 65 && e.ctrlKey === true) ||
-             // Allow: Ctrl+C
-             (e.keyCode == 67 && e.ctrlKey === true) ||
-             // Allow: Ctrl+X
-             (e.keyCode == 88 && e.ctrlKey === true) ||
-             // Allow: home, end, left, right
-             (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 // let it happen, don't do anything
-             return;
-         }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-
-</script>
-
 @if(Session::has('success'))
 <script>
 $(document).ready(function() {
